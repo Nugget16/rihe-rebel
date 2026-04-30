@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Your Project Title</title>
+    <style>
+        body,h1,h2,h3 {font-family: "Raleway", Arial, sans-serif}
+        h1 {letter-spacing: 6px}
+        .w3-row-padding img {margin-bottom: 12px}
+    </style>
+  </head>
+  <body>
+    <header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+        <h1>ReBeL-Style Reinforcement Learning and Search for Rhode Island Hold'em: Benchmarking Against a Solved Optimal Strategy</h1>
+        <h3>Anuj Sakarda</h3>  
+        <h3>Advised by James Glenn</h3>
+        <h2>Abstract</h2>
+        <p> Poker is one of the most studied domains in AI research due to its combination of hidden information, sequential decision-making, and the need for mixed strategies. Rhode Island Hold'em (RIHE) is a simplified two-player poker variant designed for research because it is small enough to solve exactly, but complex enough to require the same fundamental reasoning as variants like Texas Hold'em. We implement and benchmark a series of poker agents against the Gilpin and Sandholm (2005) solved Nash equilibrium strategy for RIHE, culminating in a ReBeL-style agent inspired by the framework introduced by Brown et al. (2020), which combines deep reinforcement learning with decision-time search for imperfect-information games.
+
+We implement five agents: a random baseline, a hand-strength heuristic, an external-sampling Monte Carlo CFR (MCCFR) agent trained to 2 million iterations, the Gilpin-Sandholm solved strategy (GSI), and a ReBeL-style agent consisting of a public belief state encoder, a neural value network trained on self-play trajectories, and a depth-limited CFR search procedure. All agents are evaluated via seat-averaged expected value over 10,000 hands per matchup, providing a comprehensive picture of relative performance across all agents.
+	</p>
+        <div class="w3-padding-32">
+          <h2>Deliverables</h2>
+            <div class="w3-bar w3-border">
+              <a href="final_thesis.pdf" class="w3-bar-item w3-button">Final Report</a>
+              <a href="proposal.pdf" class="w3-bar-item w3-button">Project Proposal</a>
+              <a href="poster.pdf" class="w3-bar-item w3-button">Final Poster</a>
+              <a href="https://github.com/Nugget16/rihe-rebel" class="w3-bar-item w3-button">Github Repo</a>
+            </div>
+          </div>
+      </header>
+
+  </body>
+</html>
