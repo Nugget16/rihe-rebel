@@ -1,0 +1,3931 @@
+Compiled from "GameState.java"
+public class GameState {
+  public static final int PLAYER;
+
+  public static final int COMPUTER;
+
+  public static final int PREFLOP;
+
+  public static final int POSTFLOP;
+
+  public static final int POSTTURN;
+
+  public static final int CALL;
+
+  public static final int CHECK;
+
+  public static final int FOLD;
+
+  public static final int BET;
+
+  public static final int RAISE;
+
+  private static final int START;
+
+  private static final int K;
+
+  private static final int Kk;
+
+  private static final int Kb;
+
+  private static final int KbC;
+
+  private static final int KbR;
+
+  private static final int KbRc;
+
+  private static final int KbRr;
+
+  private static final int KbRrC;
+
+  private static final int KbRrF;
+
+  private static final int KbRf;
+
+  private static final int KbF;
+
+  private static final int B;
+
+  private static final int Bc;
+
+  private static final int Br;
+
+  private static final int BrC;
+
+  private static final int BrR;
+
+  private static final int BrRc;
+
+  private static final int BrRf;
+
+  private static final int BrF;
+
+  private static final int Bf;
+
+  public int round;
+
+  public int player_turn;
+
+  private int dealer;
+
+  public int pot;
+
+  private int bh1;
+
+  private int bh2;
+
+  private int bh3;
+
+  public int opp_chips;
+
+  public int player_chips;
+
+  public int flop_card;
+
+  public int turn_card;
+
+  public int opp_card;
+
+  public int player_card;
+
+  public boolean can_call;
+
+  public boolean can_check;
+
+  public boolean can_fold;
+
+  public boolean can_bet;
+
+  public boolean can_raise;
+
+  public boolean do_flop;
+
+  public boolean do_turn;
+
+  public boolean game_over;
+
+  public java.lang.String winner;
+
+  public boolean dealt;
+
+  java.util.Random random;
+
+  Player player;
+
+  private double[] beliefs1;
+
+  private double[] beliefs2;
+
+  private BeliefTable player_table;
+
+  private BeliefTable opponent_table;
+
+  public GameState(BeliefTable, BeliefTable);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #2                  // Field player_table:LBeliefTable;
+         9: aload_0
+        10: aload_2
+        11: putfield      #3                  // Field opponent_table:LBeliefTable;
+        14: aload_0
+        15: new           #4                  // class java/util/Random
+        18: dup
+        19: invokespecial #5                  // Method java/util/Random."<init>":()V
+        22: putfield      #6                  // Field random:Ljava/util/Random;
+        25: aload_0
+        26: new           #7                  // class java/lang/String
+        29: dup
+        30: invokespecial #8                  // Method java/lang/String."<init>":()V
+        33: putfield      #9                  // Field winner:Ljava/lang/String;
+        36: aload_0
+        37: new           #10                 // class Player
+        40: dup
+        41: invokespecial #11                 // Method Player."<init>":()V
+        44: putfield      #12                 // Field player:LPlayer;
+        47: aload_0
+        48: bipush        52
+        50: newarray       double
+        52: putfield      #13                 // Field beliefs1:[D
+        55: aload_0
+        56: bipush        52
+        58: newarray       double
+        60: putfield      #14                 // Field beliefs2:[D
+        63: aload_0
+        64: invokevirtual #15                 // Method reset:()V
+        67: return
+
+  public void reset();
+    Code:
+         0: aload_0
+         1: aload_0
+         2: sipush        1000
+         5: dup_x1
+         6: putfield      #16                 // Field player_chips:I
+         9: putfield      #17                 // Field opp_chips:I
+        12: aload_0
+        13: iconst_0
+        14: putfield      #18                 // Field pot:I
+        17: aload_0
+        18: iconst_1
+        19: putfield      #19                 // Field dealer:I
+        22: aload_0
+        23: iconst_0
+        24: putfield      #20                 // Field round:I
+        27: aload_0
+        28: aload_0
+        29: aload_0
+        30: iconst_0
+        31: dup_x1
+        32: putfield      #21                 // Field bh3:I
+        35: dup_x1
+        36: putfield      #22                 // Field bh2:I
+        39: putfield      #23                 // Field bh1:I
+        42: aload_0
+        43: iconst_1
+        44: putfield      #24                 // Field game_over:Z
+        47: aload_0
+        48: ldc           #25                 // String
+        50: putfield      #9                  // Field winner:Ljava/lang/String;
+        53: aload_0
+        54: aload_0
+        55: aload_0
+        56: aload_0
+        57: iconst_0
+        58: dup_x1
+        59: putfield      #26                 // Field flop_card:I
+        62: dup_x1
+        63: putfield      #27                 // Field turn_card:I
+        66: dup_x1
+        67: putfield      #28                 // Field opp_card:I
+        70: putfield      #29                 // Field player_card:I
+        73: aload_0
+        74: iconst_0
+        75: putfield      #30                 // Field dealt:Z
+        78: return
+
+  public void new_game();
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: aload_0
+         3: getfield      #19                 // Field dealer:I
+         6: isub
+         7: putfield      #19                 // Field dealer:I
+        10: aload_0
+        11: iconst_1
+        12: aload_0
+        13: getfield      #19                 // Field dealer:I
+        16: isub
+        17: putfield      #31                 // Field player_turn:I
+        20: aload_0
+        21: bipush        10
+        23: putfield      #18                 // Field pot:I
+        26: aload_0
+        27: dup
+        28: getfield      #17                 // Field opp_chips:I
+        31: iconst_5
+        32: isub
+        33: putfield      #17                 // Field opp_chips:I
+        36: aload_0
+        37: dup
+        38: getfield      #16                 // Field player_chips:I
+        41: iconst_5
+        42: isub
+        43: putfield      #16                 // Field player_chips:I
+        46: aload_0
+        47: iconst_0
+        48: putfield      #20                 // Field round:I
+        51: aload_0
+        52: aload_0
+        53: aload_0
+        54: iconst_0
+        55: dup_x1
+        56: putfield      #21                 // Field bh3:I
+        59: dup_x1
+        60: putfield      #22                 // Field bh2:I
+        63: putfield      #23                 // Field bh1:I
+        66: aload_0
+        67: aload_0
+        68: aload_0
+        69: iconst_1
+        70: dup_x1
+        71: putfield      #32                 // Field can_raise:Z
+        74: dup_x1
+        75: putfield      #33                 // Field can_fold:Z
+        78: putfield      #34                 // Field can_call:Z
+        81: aload_0
+        82: aload_0
+        83: iconst_0
+        84: dup_x1
+        85: putfield      #35                 // Field can_bet:Z
+        88: putfield      #36                 // Field can_check:Z
+        91: aload_0
+        92: aload_0
+        93: aload_0
+        94: iconst_0
+        95: dup_x1
+        96: putfield      #37                 // Field do_turn:Z
+        99: dup_x1
+       100: putfield      #38                 // Field do_flop:Z
+       103: putfield      #24                 // Field game_over:Z
+       106: aload_0
+       107: invokespecial #39                 // Method shuffle:()V
+       110: aload_0
+       111: invokevirtual #40                 // Method compute_beliefs:()V
+       114: return
+
+  public void do_action(int);
+    Code:
+         0: iload_1
+         1: tableswitch   { // 0 to 4
+                       0: 36
+                       1: 612
+                       2: 861
+                       3: 1416
+                       4: 1758
+                 default: 2204
+            }
+        36: aload_0
+        37: getfield      #20                 // Field round:I
+        40: tableswitch   { // 0 to 2
+                       0: 68
+                       1: 248
+                       2: 428
+                 default: 605
+            }
+        68: aload_0
+        69: dup
+        70: getfield      #18                 // Field pot:I
+        73: bipush        10
+        75: iadd
+        76: putfield      #18                 // Field pot:I
+        79: aload_0
+        80: getfield      #31                 // Field player_turn:I
+        83: ifne          100
+        86: aload_0
+        87: dup
+        88: getfield      #16                 // Field player_chips:I
+        91: bipush        10
+        93: isub
+        94: putfield      #16                 // Field player_chips:I
+        97: goto          111
+       100: aload_0
+       101: dup
+       102: getfield      #17                 // Field opp_chips:I
+       105: bipush        10
+       107: isub
+       108: putfield      #17                 // Field opp_chips:I
+       111: aload_0
+       112: getfield      #23                 // Field bh1:I
+       115: tableswitch   { // 3 to 16
+                       3: 184
+                       4: 237
+                       5: 192
+                       6: 237
+                       7: 201
+                       8: 237
+                       9: 237
+                      10: 237
+                      11: 237
+                      12: 210
+                      13: 237
+                      14: 219
+                      15: 237
+                      16: 228
+                 default: 237
+            }
+       184: aload_0
+       185: iconst_4
+       186: putfield      #23                 // Field bh1:I
+       189: goto          605
+       192: aload_0
+       193: bipush        6
+       195: putfield      #23                 // Field bh1:I
+       198: goto          605
+       201: aload_0
+       202: bipush        8
+       204: putfield      #23                 // Field bh1:I
+       207: goto          605
+       210: aload_0
+       211: bipush        13
+       213: putfield      #23                 // Field bh1:I
+       216: goto          605
+       219: aload_0
+       220: bipush        15
+       222: putfield      #23                 // Field bh1:I
+       225: goto          605
+       228: aload_0
+       229: bipush        17
+       231: putfield      #23                 // Field bh1:I
+       234: goto          605
+       237: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       240: ldc           #42                 // String default reached
+       242: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       245: goto          605
+       248: aload_0
+       249: dup
+       250: getfield      #18                 // Field pot:I
+       253: bipush        20
+       255: iadd
+       256: putfield      #18                 // Field pot:I
+       259: aload_0
+       260: getfield      #31                 // Field player_turn:I
+       263: ifne          280
+       266: aload_0
+       267: dup
+       268: getfield      #16                 // Field player_chips:I
+       271: bipush        20
+       273: isub
+       274: putfield      #16                 // Field player_chips:I
+       277: goto          291
+       280: aload_0
+       281: dup
+       282: getfield      #17                 // Field opp_chips:I
+       285: bipush        20
+       287: isub
+       288: putfield      #17                 // Field opp_chips:I
+       291: aload_0
+       292: getfield      #22                 // Field bh2:I
+       295: tableswitch   { // 3 to 16
+                       3: 364
+                       4: 417
+                       5: 372
+                       6: 417
+                       7: 381
+                       8: 417
+                       9: 417
+                      10: 417
+                      11: 417
+                      12: 390
+                      13: 417
+                      14: 399
+                      15: 417
+                      16: 408
+                 default: 417
+            }
+       364: aload_0
+       365: iconst_4
+       366: putfield      #22                 // Field bh2:I
+       369: goto          605
+       372: aload_0
+       373: bipush        6
+       375: putfield      #22                 // Field bh2:I
+       378: goto          605
+       381: aload_0
+       382: bipush        8
+       384: putfield      #22                 // Field bh2:I
+       387: goto          605
+       390: aload_0
+       391: bipush        13
+       393: putfield      #22                 // Field bh2:I
+       396: goto          605
+       399: aload_0
+       400: bipush        15
+       402: putfield      #22                 // Field bh2:I
+       405: goto          605
+       408: aload_0
+       409: bipush        17
+       411: putfield      #22                 // Field bh2:I
+       414: goto          605
+       417: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       420: ldc           #42                 // String default reached
+       422: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       425: goto          605
+       428: aload_0
+       429: dup
+       430: getfield      #18                 // Field pot:I
+       433: bipush        20
+       435: iadd
+       436: putfield      #18                 // Field pot:I
+       439: aload_0
+       440: getfield      #31                 // Field player_turn:I
+       443: ifne          460
+       446: aload_0
+       447: dup
+       448: getfield      #16                 // Field player_chips:I
+       451: bipush        20
+       453: isub
+       454: putfield      #16                 // Field player_chips:I
+       457: goto          471
+       460: aload_0
+       461: dup
+       462: getfield      #17                 // Field opp_chips:I
+       465: bipush        20
+       467: isub
+       468: putfield      #17                 // Field opp_chips:I
+       471: aload_0
+       472: getfield      #21                 // Field bh3:I
+       475: tableswitch   { // 3 to 16
+                       3: 544
+                       4: 597
+                       5: 552
+                       6: 597
+                       7: 561
+                       8: 597
+                       9: 597
+                      10: 597
+                      11: 597
+                      12: 570
+                      13: 597
+                      14: 579
+                      15: 597
+                      16: 588
+                 default: 597
+            }
+       544: aload_0
+       545: iconst_4
+       546: putfield      #21                 // Field bh3:I
+       549: goto          605
+       552: aload_0
+       553: bipush        6
+       555: putfield      #21                 // Field bh3:I
+       558: goto          605
+       561: aload_0
+       562: bipush        8
+       564: putfield      #21                 // Field bh3:I
+       567: goto          605
+       570: aload_0
+       571: bipush        13
+       573: putfield      #21                 // Field bh3:I
+       576: goto          605
+       579: aload_0
+       580: bipush        15
+       582: putfield      #21                 // Field bh3:I
+       585: goto          605
+       588: aload_0
+       589: bipush        17
+       591: putfield      #21                 // Field bh3:I
+       594: goto          605
+       597: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       600: ldc           #42                 // String default reached
+       602: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       605: aload_0
+       606: invokespecial #44                 // Method advance_round:()V
+       609: goto          2212
+       612: aload_0
+       613: getfield      #20                 // Field round:I
+       616: tableswitch   { // 0 to 2
+                       0: 644
+                       1: 717
+                       2: 789
+                 default: 858
+            }
+       644: aload_0
+       645: getfield      #23                 // Field bh1:I
+       648: lookupswitch  { // 2
+                       0: 676
+                       1: 694
+                 default: 706
+            }
+       676: aload_0
+       677: iconst_1
+       678: putfield      #23                 // Field bh1:I
+       681: aload_0
+       682: iconst_1
+       683: aload_0
+       684: getfield      #31                 // Field player_turn:I
+       687: isub
+       688: putfield      #31                 // Field player_turn:I
+       691: goto          858
+       694: aload_0
+       695: iconst_2
+       696: putfield      #23                 // Field bh1:I
+       699: aload_0
+       700: invokespecial #44                 // Method advance_round:()V
+       703: goto          858
+       706: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       709: ldc           #42                 // String default reached
+       711: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       714: goto          858
+       717: aload_0
+       718: getfield      #22                 // Field bh2:I
+       721: lookupswitch  { // 2
+                       0: 748
+                       1: 766
+                 default: 778
+            }
+       748: aload_0
+       749: iconst_1
+       750: putfield      #22                 // Field bh2:I
+       753: aload_0
+       754: iconst_1
+       755: aload_0
+       756: getfield      #31                 // Field player_turn:I
+       759: isub
+       760: putfield      #31                 // Field player_turn:I
+       763: goto          858
+       766: aload_0
+       767: iconst_2
+       768: putfield      #22                 // Field bh2:I
+       771: aload_0
+       772: invokespecial #44                 // Method advance_round:()V
+       775: goto          858
+       778: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       781: ldc           #42                 // String default reached
+       783: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       786: goto          858
+       789: aload_0
+       790: getfield      #21                 // Field bh3:I
+       793: lookupswitch  { // 2
+                       0: 820
+                       1: 838
+                 default: 850
+            }
+       820: aload_0
+       821: iconst_1
+       822: putfield      #21                 // Field bh3:I
+       825: aload_0
+       826: iconst_1
+       827: aload_0
+       828: getfield      #31                 // Field player_turn:I
+       831: isub
+       832: putfield      #31                 // Field player_turn:I
+       835: goto          858
+       838: aload_0
+       839: iconst_2
+       840: putfield      #21                 // Field bh3:I
+       843: aload_0
+       844: invokespecial #44                 // Method advance_round:()V
+       847: goto          858
+       850: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       853: ldc           #42                 // String default reached
+       855: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       858: goto          2212
+       861: aload_0
+       862: getfield      #20                 // Field round:I
+       865: tableswitch   { // 0 to 2
+                       0: 892
+                       1: 1033
+                       2: 1173
+                 default: 1310
+            }
+       892: aload_0
+       893: getfield      #23                 // Field bh1:I
+       896: tableswitch   { // 3 to 16
+                       3: 986
+                       4: 1022
+                       5: 977
+                       6: 1022
+                       7: 968
+                       8: 1022
+                       9: 1022
+                      10: 1022
+                      11: 1022
+                      12: 1013
+                      13: 1022
+                      14: 1004
+                      15: 1022
+                      16: 995
+                 default: 1022
+            }
+       968: aload_0
+       969: bipush        9
+       971: putfield      #23                 // Field bh1:I
+       974: goto          1310
+       977: aload_0
+       978: bipush        10
+       980: putfield      #23                 // Field bh1:I
+       983: goto          1310
+       986: aload_0
+       987: bipush        11
+       989: putfield      #23                 // Field bh1:I
+       992: goto          1310
+       995: aload_0
+       996: bipush        18
+       998: putfield      #23                 // Field bh1:I
+      1001: goto          1310
+      1004: aload_0
+      1005: bipush        19
+      1007: putfield      #23                 // Field bh1:I
+      1010: goto          1310
+      1013: aload_0
+      1014: bipush        20
+      1016: putfield      #23                 // Field bh1:I
+      1019: goto          1310
+      1022: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1025: ldc           #42                 // String default reached
+      1027: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1030: goto          1310
+      1033: aload_0
+      1034: getfield      #22                 // Field bh2:I
+      1037: tableswitch   { // 3 to 16
+                       3: 1126
+                       4: 1162
+                       5: 1117
+                       6: 1162
+                       7: 1108
+                       8: 1162
+                       9: 1162
+                      10: 1162
+                      11: 1162
+                      12: 1153
+                      13: 1162
+                      14: 1144
+                      15: 1162
+                      16: 1135
+                 default: 1162
+            }
+      1108: aload_0
+      1109: bipush        9
+      1111: putfield      #22                 // Field bh2:I
+      1114: goto          1310
+      1117: aload_0
+      1118: bipush        10
+      1120: putfield      #22                 // Field bh2:I
+      1123: goto          1310
+      1126: aload_0
+      1127: bipush        11
+      1129: putfield      #22                 // Field bh2:I
+      1132: goto          1310
+      1135: aload_0
+      1136: bipush        18
+      1138: putfield      #22                 // Field bh2:I
+      1141: goto          1310
+      1144: aload_0
+      1145: bipush        19
+      1147: putfield      #22                 // Field bh2:I
+      1150: goto          1310
+      1153: aload_0
+      1154: bipush        20
+      1156: putfield      #22                 // Field bh2:I
+      1159: goto          1310
+      1162: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1165: ldc           #42                 // String default reached
+      1167: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1170: goto          1310
+      1173: aload_0
+      1174: getfield      #21                 // Field bh3:I
+      1177: tableswitch   { // 3 to 16
+                       3: 1266
+                       4: 1302
+                       5: 1257
+                       6: 1302
+                       7: 1248
+                       8: 1302
+                       9: 1302
+                      10: 1302
+                      11: 1302
+                      12: 1293
+                      13: 1302
+                      14: 1284
+                      15: 1302
+                      16: 1275
+                 default: 1302
+            }
+      1248: aload_0
+      1249: bipush        9
+      1251: putfield      #21                 // Field bh3:I
+      1254: goto          1310
+      1257: aload_0
+      1258: bipush        10
+      1260: putfield      #21                 // Field bh3:I
+      1263: goto          1310
+      1266: aload_0
+      1267: bipush        11
+      1269: putfield      #21                 // Field bh3:I
+      1272: goto          1310
+      1275: aload_0
+      1276: bipush        18
+      1278: putfield      #21                 // Field bh3:I
+      1281: goto          1310
+      1284: aload_0
+      1285: bipush        19
+      1287: putfield      #21                 // Field bh3:I
+      1290: goto          1310
+      1293: aload_0
+      1294: bipush        20
+      1296: putfield      #21                 // Field bh3:I
+      1299: goto          1310
+      1302: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1305: ldc           #42                 // String default reached
+      1307: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1310: aload_0
+      1311: getfield      #31                 // Field player_turn:I
+      1314: ifne          1364
+      1317: aload_0
+      1318: dup
+      1319: getfield      #17                 // Field opp_chips:I
+      1322: aload_0
+      1323: getfield      #18                 // Field pot:I
+      1326: iadd
+      1327: putfield      #17                 // Field opp_chips:I
+      1330: aload_0
+      1331: new           #45                 // class java/lang/StringBuffer
+      1334: dup
+      1335: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+      1338: ldc           #47                 // String Computer wins
+      1340: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      1343: aload_0
+      1344: getfield      #18                 // Field pot:I
+      1347: invokevirtual #49                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+      1350: ldc           #50                 // String  chips from the pot.\n
+      1352: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      1355: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+      1358: putfield      #9                  // Field winner:Ljava/lang/String;
+      1361: goto          1408
+      1364: aload_0
+      1365: dup
+      1366: getfield      #16                 // Field player_chips:I
+      1369: aload_0
+      1370: getfield      #18                 // Field pot:I
+      1373: iadd
+      1374: putfield      #16                 // Field player_chips:I
+      1377: aload_0
+      1378: new           #45                 // class java/lang/StringBuffer
+      1381: dup
+      1382: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+      1385: ldc           #52                 // String Player wins
+      1387: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      1390: aload_0
+      1391: getfield      #18                 // Field pot:I
+      1394: invokevirtual #49                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+      1397: ldc           #50                 // String  chips from the pot.\n
+      1399: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      1402: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+      1405: putfield      #9                  // Field winner:Ljava/lang/String;
+      1408: aload_0
+      1409: iconst_1
+      1410: putfield      #24                 // Field game_over:Z
+      1413: goto          2212
+      1416: aload_0
+      1417: getfield      #20                 // Field round:I
+      1420: tableswitch   { // 0 to 2
+                       0: 1448
+                       1: 1548
+                       2: 1648
+                 default: 1745
+            }
+      1448: aload_0
+      1449: dup
+      1450: getfield      #18                 // Field pot:I
+      1453: bipush        10
+      1455: iadd
+      1456: putfield      #18                 // Field pot:I
+      1459: aload_0
+      1460: getfield      #31                 // Field player_turn:I
+      1463: ifne          1480
+      1466: aload_0
+      1467: dup
+      1468: getfield      #16                 // Field player_chips:I
+      1471: bipush        10
+      1473: isub
+      1474: putfield      #16                 // Field player_chips:I
+      1477: goto          1491
+      1480: aload_0
+      1481: dup
+      1482: getfield      #17                 // Field opp_chips:I
+      1485: bipush        10
+      1487: isub
+      1488: putfield      #17                 // Field opp_chips:I
+      1491: aload_0
+      1492: getfield      #23                 // Field bh1:I
+      1495: lookupswitch  { // 2
+                       0: 1520
+                       1: 1529
+                 default: 1537
+            }
+      1520: aload_0
+      1521: bipush        12
+      1523: putfield      #23                 // Field bh1:I
+      1526: goto          1745
+      1529: aload_0
+      1530: iconst_3
+      1531: putfield      #23                 // Field bh1:I
+      1534: goto          1745
+      1537: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1540: ldc           #42                 // String default reached
+      1542: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1545: goto          1745
+      1548: aload_0
+      1549: dup
+      1550: getfield      #18                 // Field pot:I
+      1553: bipush        20
+      1555: iadd
+      1556: putfield      #18                 // Field pot:I
+      1559: aload_0
+      1560: getfield      #31                 // Field player_turn:I
+      1563: ifne          1580
+      1566: aload_0
+      1567: dup
+      1568: getfield      #16                 // Field player_chips:I
+      1571: bipush        20
+      1573: isub
+      1574: putfield      #16                 // Field player_chips:I
+      1577: goto          1591
+      1580: aload_0
+      1581: dup
+      1582: getfield      #17                 // Field opp_chips:I
+      1585: bipush        20
+      1587: isub
+      1588: putfield      #17                 // Field opp_chips:I
+      1591: aload_0
+      1592: getfield      #22                 // Field bh2:I
+      1595: lookupswitch  { // 2
+                       0: 1620
+                       1: 1629
+                 default: 1637
+            }
+      1620: aload_0
+      1621: bipush        12
+      1623: putfield      #22                 // Field bh2:I
+      1626: goto          1745
+      1629: aload_0
+      1630: iconst_3
+      1631: putfield      #22                 // Field bh2:I
+      1634: goto          1745
+      1637: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1640: ldc           #42                 // String default reached
+      1642: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1645: goto          1745
+      1648: aload_0
+      1649: dup
+      1650: getfield      #18                 // Field pot:I
+      1653: bipush        20
+      1655: iadd
+      1656: putfield      #18                 // Field pot:I
+      1659: aload_0
+      1660: getfield      #31                 // Field player_turn:I
+      1663: ifne          1680
+      1666: aload_0
+      1667: dup
+      1668: getfield      #16                 // Field player_chips:I
+      1671: bipush        20
+      1673: isub
+      1674: putfield      #16                 // Field player_chips:I
+      1677: goto          1691
+      1680: aload_0
+      1681: dup
+      1682: getfield      #17                 // Field opp_chips:I
+      1685: bipush        20
+      1687: isub
+      1688: putfield      #17                 // Field opp_chips:I
+      1691: aload_0
+      1692: getfield      #21                 // Field bh3:I
+      1695: lookupswitch  { // 2
+                       0: 1720
+                       1: 1729
+                 default: 1737
+            }
+      1720: aload_0
+      1721: bipush        12
+      1723: putfield      #21                 // Field bh3:I
+      1726: goto          1745
+      1729: aload_0
+      1730: iconst_3
+      1731: putfield      #21                 // Field bh3:I
+      1734: goto          1745
+      1737: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1740: ldc           #42                 // String default reached
+      1742: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1745: aload_0
+      1746: iconst_1
+      1747: aload_0
+      1748: getfield      #31                 // Field player_turn:I
+      1751: isub
+      1752: putfield      #31                 // Field player_turn:I
+      1755: goto          2212
+      1758: aload_0
+      1759: getfield      #20                 // Field round:I
+      1762: tableswitch   { // 0 to 2
+                       0: 1788
+                       1: 1922
+                       2: 2058
+                 default: 2191
+            }
+      1788: aload_0
+      1789: dup
+      1790: getfield      #18                 // Field pot:I
+      1793: bipush        20
+      1795: iadd
+      1796: putfield      #18                 // Field pot:I
+      1799: aload_0
+      1800: getfield      #31                 // Field player_turn:I
+      1803: ifne          1820
+      1806: aload_0
+      1807: dup
+      1808: getfield      #16                 // Field player_chips:I
+      1811: bipush        20
+      1813: isub
+      1814: putfield      #16                 // Field player_chips:I
+      1817: goto          1831
+      1820: aload_0
+      1821: dup
+      1822: getfield      #17                 // Field opp_chips:I
+      1825: bipush        20
+      1827: isub
+      1828: putfield      #17                 // Field opp_chips:I
+      1831: aload_0
+      1832: getfield      #23                 // Field bh1:I
+      1835: lookupswitch  { // 4
+                       3: 1876
+                       5: 1884
+                      12: 1893
+                      14: 1902
+                 default: 1911
+            }
+      1876: aload_0
+      1877: iconst_5
+      1878: putfield      #23                 // Field bh1:I
+      1881: goto          2191
+      1884: aload_0
+      1885: bipush        7
+      1887: putfield      #23                 // Field bh1:I
+      1890: goto          2191
+      1893: aload_0
+      1894: bipush        14
+      1896: putfield      #23                 // Field bh1:I
+      1899: goto          2191
+      1902: aload_0
+      1903: bipush        16
+      1905: putfield      #23                 // Field bh1:I
+      1908: goto          2191
+      1911: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1914: ldc           #42                 // String default reached
+      1916: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1919: goto          2191
+      1922: aload_0
+      1923: dup
+      1924: getfield      #18                 // Field pot:I
+      1927: bipush        40
+      1929: iadd
+      1930: putfield      #18                 // Field pot:I
+      1933: aload_0
+      1934: getfield      #31                 // Field player_turn:I
+      1937: ifne          1954
+      1940: aload_0
+      1941: dup
+      1942: getfield      #16                 // Field player_chips:I
+      1945: bipush        40
+      1947: isub
+      1948: putfield      #16                 // Field player_chips:I
+      1951: goto          1965
+      1954: aload_0
+      1955: dup
+      1956: getfield      #17                 // Field opp_chips:I
+      1959: bipush        40
+      1961: isub
+      1962: putfield      #17                 // Field opp_chips:I
+      1965: aload_0
+      1966: getfield      #22                 // Field bh2:I
+      1969: lookupswitch  { // 4
+                       3: 2012
+                       5: 2020
+                      12: 2029
+                      14: 2038
+                 default: 2047
+            }
+      2012: aload_0
+      2013: iconst_5
+      2014: putfield      #22                 // Field bh2:I
+      2017: goto          2191
+      2020: aload_0
+      2021: bipush        7
+      2023: putfield      #22                 // Field bh2:I
+      2026: goto          2191
+      2029: aload_0
+      2030: bipush        14
+      2032: putfield      #22                 // Field bh2:I
+      2035: goto          2191
+      2038: aload_0
+      2039: bipush        16
+      2041: putfield      #22                 // Field bh2:I
+      2044: goto          2191
+      2047: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      2050: ldc           #42                 // String default reached
+      2052: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      2055: goto          2191
+      2058: aload_0
+      2059: dup
+      2060: getfield      #18                 // Field pot:I
+      2063: bipush        40
+      2065: iadd
+      2066: putfield      #18                 // Field pot:I
+      2069: aload_0
+      2070: getfield      #31                 // Field player_turn:I
+      2073: ifne          2090
+      2076: aload_0
+      2077: dup
+      2078: getfield      #16                 // Field player_chips:I
+      2081: bipush        40
+      2083: isub
+      2084: putfield      #16                 // Field player_chips:I
+      2087: goto          2101
+      2090: aload_0
+      2091: dup
+      2092: getfield      #17                 // Field opp_chips:I
+      2095: bipush        40
+      2097: isub
+      2098: putfield      #17                 // Field opp_chips:I
+      2101: aload_0
+      2102: getfield      #21                 // Field bh3:I
+      2105: lookupswitch  { // 4
+                       3: 2148
+                       5: 2156
+                      12: 2165
+                      14: 2174
+                 default: 2183
+            }
+      2148: aload_0
+      2149: iconst_5
+      2150: putfield      #21                 // Field bh3:I
+      2153: goto          2191
+      2156: aload_0
+      2157: bipush        7
+      2159: putfield      #21                 // Field bh3:I
+      2162: goto          2191
+      2165: aload_0
+      2166: bipush        14
+      2168: putfield      #21                 // Field bh3:I
+      2171: goto          2191
+      2174: aload_0
+      2175: bipush        16
+      2177: putfield      #21                 // Field bh3:I
+      2180: goto          2191
+      2183: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      2186: ldc           #42                 // String default reached
+      2188: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      2191: aload_0
+      2192: iconst_1
+      2193: aload_0
+      2194: getfield      #31                 // Field player_turn:I
+      2197: isub
+      2198: putfield      #31                 // Field player_turn:I
+      2201: goto          2212
+      2204: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      2207: ldc           #42                 // String default reached
+      2209: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      2212: aload_0
+      2213: invokevirtual #40                 // Method compute_beliefs:()V
+      2216: return
+
+  public void compute_beliefs();
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field dealer:I
+         4: ifne          20
+         7: aload_0
+         8: getfield      #28                 // Field opp_card:I
+        11: istore_1
+        12: aload_0
+        13: getfield      #29                 // Field player_card:I
+        16: istore_2
+        17: goto          30
+        20: aload_0
+        21: getfield      #29                 // Field player_card:I
+        24: istore_1
+        25: aload_0
+        26: getfield      #28                 // Field opp_card:I
+        29: istore_2
+        30: aload_0
+        31: getfield      #20                 // Field round:I
+        34: tableswitch   { // 0 to 2
+                       0: 60
+                       1: 834
+                       2: 1974
+                 default: 3503
+            }
+        60: aload_0
+        61: getfield      #23                 // Field bh1:I
+        64: tableswitch   { // 0 to 20
+                       0: 164
+                       1: 234
+                       2: 823
+                       3: 312
+                       4: 823
+                       5: 398
+                       6: 823
+                       7: 484
+                       8: 823
+                       9: 820
+                      10: 820
+                      11: 820
+                      12: 570
+                      13: 823
+                      14: 648
+                      15: 823
+                      16: 734
+                      17: 823
+                      18: 820
+                      19: 820
+                      20: 820
+                 default: 823
+            }
+       164: iconst_0
+       165: istore        5
+       167: iload         5
+       169: bipush        52
+       171: if_icmpge     3503
+       174: iload         5
+       176: iload_1
+       177: if_icmpne     191
+       180: aload_0
+       181: getfield      #13                 // Field beliefs1:[D
+       184: iload         5
+       186: dconst_0
+       187: dastore
+       188: goto          201
+       191: aload_0
+       192: getfield      #13                 // Field beliefs1:[D
+       195: iload         5
+       197: ldc2_w        #53                 // double 0.0196078431372549d
+       200: dastore
+       201: iload         5
+       203: iload_2
+       204: if_icmpne     218
+       207: aload_0
+       208: getfield      #14                 // Field beliefs2:[D
+       211: iload         5
+       213: dconst_0
+       214: dastore
+       215: goto          228
+       218: aload_0
+       219: getfield      #14                 // Field beliefs2:[D
+       222: iload         5
+       224: ldc2_w        #53                 // double 0.0196078431372549d
+       227: dastore
+       228: iinc          5, 1
+       231: goto          167
+       234: iconst_0
+       235: istore        5
+       237: iload         5
+       239: bipush        52
+       241: if_icmpge     3503
+       244: iload         5
+       246: iload_1
+       247: if_icmpne     261
+       250: aload_0
+       251: getfield      #13                 // Field beliefs1:[D
+       254: iload         5
+       256: dconst_0
+       257: dastore
+       258: goto          271
+       261: aload_0
+       262: getfield      #13                 // Field beliefs1:[D
+       265: iload         5
+       267: ldc2_w        #53                 // double 0.0196078431372549d
+       270: dastore
+       271: iload         5
+       273: iload_2
+       274: if_icmpne     288
+       277: aload_0
+       278: getfield      #14                 // Field beliefs2:[D
+       281: iload         5
+       283: dconst_0
+       284: dastore
+       285: goto          306
+       288: aload_0
+       289: getfield      #14                 // Field beliefs2:[D
+       292: iload         5
+       294: aload_0
+       295: getfield      #12                 // Field player:LPlayer;
+       298: iload         5
+       300: iload_2
+       301: iconst_0
+       302: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       305: dastore
+       306: iinc          5, 1
+       309: goto          237
+       312: iconst_0
+       313: istore        5
+       315: iload         5
+       317: bipush        52
+       319: if_icmpge     3503
+       322: iload         5
+       324: iload_1
+       325: if_icmpne     339
+       328: aload_0
+       329: getfield      #13                 // Field beliefs1:[D
+       332: iload         5
+       334: dconst_0
+       335: dastore
+       336: goto          357
+       339: aload_0
+       340: getfield      #13                 // Field beliefs1:[D
+       343: iload         5
+       345: aload_0
+       346: getfield      #12                 // Field player:LPlayer;
+       349: iload_1
+       350: iload         5
+       352: iconst_1
+       353: invokevirtual #56                 // Method Player.get_prob_of_card_player1:(III)D
+       356: dastore
+       357: iload         5
+       359: iload_2
+       360: if_icmpne     374
+       363: aload_0
+       364: getfield      #14                 // Field beliefs2:[D
+       367: iload         5
+       369: dconst_0
+       370: dastore
+       371: goto          392
+       374: aload_0
+       375: getfield      #14                 // Field beliefs2:[D
+       378: iload         5
+       380: aload_0
+       381: getfield      #12                 // Field player:LPlayer;
+       384: iload         5
+       386: iload_2
+       387: iconst_0
+       388: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       391: dastore
+       392: iinc          5, 1
+       395: goto          315
+       398: iconst_0
+       399: istore        5
+       401: iload         5
+       403: bipush        52
+       405: if_icmpge     3503
+       408: iload         5
+       410: iload_1
+       411: if_icmpne     425
+       414: aload_0
+       415: getfield      #13                 // Field beliefs1:[D
+       418: iload         5
+       420: dconst_0
+       421: dastore
+       422: goto          443
+       425: aload_0
+       426: getfield      #13                 // Field beliefs1:[D
+       429: iload         5
+       431: aload_0
+       432: getfield      #12                 // Field player:LPlayer;
+       435: iload_1
+       436: iload         5
+       438: iconst_1
+       439: invokevirtual #56                 // Method Player.get_prob_of_card_player1:(III)D
+       442: dastore
+       443: iload         5
+       445: iload_2
+       446: if_icmpne     460
+       449: aload_0
+       450: getfield      #14                 // Field beliefs2:[D
+       453: iload         5
+       455: dconst_0
+       456: dastore
+       457: goto          478
+       460: aload_0
+       461: getfield      #14                 // Field beliefs2:[D
+       464: iload         5
+       466: aload_0
+       467: getfield      #12                 // Field player:LPlayer;
+       470: iload         5
+       472: iload_2
+       473: iconst_2
+       474: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       477: dastore
+       478: iinc          5, 1
+       481: goto          401
+       484: iconst_0
+       485: istore        5
+       487: iload         5
+       489: bipush        52
+       491: if_icmpge     3503
+       494: iload         5
+       496: iload_1
+       497: if_icmpne     511
+       500: aload_0
+       501: getfield      #13                 // Field beliefs1:[D
+       504: iload         5
+       506: dconst_0
+       507: dastore
+       508: goto          529
+       511: aload_0
+       512: getfield      #13                 // Field beliefs1:[D
+       515: iload         5
+       517: aload_0
+       518: getfield      #12                 // Field player:LPlayer;
+       521: iload_1
+       522: iload         5
+       524: iconst_3
+       525: invokevirtual #56                 // Method Player.get_prob_of_card_player1:(III)D
+       528: dastore
+       529: iload         5
+       531: iload_2
+       532: if_icmpne     546
+       535: aload_0
+       536: getfield      #14                 // Field beliefs2:[D
+       539: iload         5
+       541: dconst_0
+       542: dastore
+       543: goto          564
+       546: aload_0
+       547: getfield      #14                 // Field beliefs2:[D
+       550: iload         5
+       552: aload_0
+       553: getfield      #12                 // Field player:LPlayer;
+       556: iload         5
+       558: iload_2
+       559: iconst_2
+       560: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       563: dastore
+       564: iinc          5, 1
+       567: goto          487
+       570: iconst_0
+       571: istore        5
+       573: iload         5
+       575: bipush        52
+       577: if_icmpge     3503
+       580: iload         5
+       582: iload_1
+       583: if_icmpne     597
+       586: aload_0
+       587: getfield      #13                 // Field beliefs1:[D
+       590: iload         5
+       592: dconst_0
+       593: dastore
+       594: goto          607
+       597: aload_0
+       598: getfield      #13                 // Field beliefs1:[D
+       601: iload         5
+       603: ldc2_w        #53                 // double 0.0196078431372549d
+       606: dastore
+       607: iload         5
+       609: iload_2
+       610: if_icmpne     624
+       613: aload_0
+       614: getfield      #14                 // Field beliefs2:[D
+       617: iload         5
+       619: dconst_0
+       620: dastore
+       621: goto          642
+       624: aload_0
+       625: getfield      #14                 // Field beliefs2:[D
+       628: iload         5
+       630: aload_0
+       631: getfield      #12                 // Field player:LPlayer;
+       634: iload         5
+       636: iload_2
+       637: iconst_1
+       638: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       641: dastore
+       642: iinc          5, 1
+       645: goto          573
+       648: iconst_0
+       649: istore        5
+       651: iload         5
+       653: bipush        52
+       655: if_icmpge     3503
+       658: iload         5
+       660: iload_1
+       661: if_icmpne     675
+       664: aload_0
+       665: getfield      #13                 // Field beliefs1:[D
+       668: iload         5
+       670: dconst_0
+       671: dastore
+       672: goto          693
+       675: aload_0
+       676: getfield      #13                 // Field beliefs1:[D
+       679: iload         5
+       681: aload_0
+       682: getfield      #12                 // Field player:LPlayer;
+       685: iload_1
+       686: iload         5
+       688: iconst_2
+       689: invokevirtual #56                 // Method Player.get_prob_of_card_player1:(III)D
+       692: dastore
+       693: iload         5
+       695: iload_2
+       696: if_icmpne     710
+       699: aload_0
+       700: getfield      #14                 // Field beliefs2:[D
+       703: iload         5
+       705: dconst_0
+       706: dastore
+       707: goto          728
+       710: aload_0
+       711: getfield      #14                 // Field beliefs2:[D
+       714: iload         5
+       716: aload_0
+       717: getfield      #12                 // Field player:LPlayer;
+       720: iload         5
+       722: iload_2
+       723: iconst_1
+       724: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       727: dastore
+       728: iinc          5, 1
+       731: goto          651
+       734: iconst_0
+       735: istore        5
+       737: iload         5
+       739: bipush        52
+       741: if_icmpge     3503
+       744: iload         5
+       746: iload_1
+       747: if_icmpne     761
+       750: aload_0
+       751: getfield      #13                 // Field beliefs1:[D
+       754: iload         5
+       756: dconst_0
+       757: dastore
+       758: goto          779
+       761: aload_0
+       762: getfield      #13                 // Field beliefs1:[D
+       765: iload         5
+       767: aload_0
+       768: getfield      #12                 // Field player:LPlayer;
+       771: iload_1
+       772: iload         5
+       774: iconst_2
+       775: invokevirtual #56                 // Method Player.get_prob_of_card_player1:(III)D
+       778: dastore
+       779: iload         5
+       781: iload_2
+       782: if_icmpne     796
+       785: aload_0
+       786: getfield      #14                 // Field beliefs2:[D
+       789: iload         5
+       791: dconst_0
+       792: dastore
+       793: goto          814
+       796: aload_0
+       797: getfield      #14                 // Field beliefs2:[D
+       800: iload         5
+       802: aload_0
+       803: getfield      #12                 // Field player:LPlayer;
+       806: iload         5
+       808: iload_2
+       809: iconst_3
+       810: invokevirtual #55                 // Method Player.get_prob_of_card_player2:(III)D
+       813: dastore
+       814: iinc          5, 1
+       817: goto          737
+       820: goto          3503
+       823: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       826: ldc           #57                 // String History not yet supported
+       828: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       831: goto          3503
+       834: iconst_0
+       835: istore_3
+       836: aload_0
+       837: getfield      #23                 // Field bh1:I
+       840: tableswitch   { // 2 to 17
+                       2: 920
+                       3: 956
+                       4: 925
+                       5: 956
+                       6: 930
+                       7: 956
+                       8: 935
+                       9: 956
+                      10: 956
+                      11: 956
+                      12: 956
+                      13: 940
+                      14: 956
+                      15: 945
+                      16: 956
+                      17: 950
+                 default: 956
+            }
+       920: iconst_0
+       921: istore_3
+       922: goto          964
+       925: iconst_1
+       926: istore_3
+       927: goto          964
+       930: iconst_2
+       931: istore_3
+       932: goto          964
+       935: iconst_3
+       936: istore_3
+       937: goto          964
+       940: iconst_4
+       941: istore_3
+       942: goto          964
+       945: iconst_5
+       946: istore_3
+       947: goto          964
+       950: bipush        6
+       952: istore_3
+       953: goto          964
+       956: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       959: ldc           #42                 // String default reached
+       961: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       964: aload_0
+       965: getfield      #22                 // Field bh2:I
+       968: tableswitch   { // 0 to 20
+                       0: 1068
+                       1: 1172
+                       2: 1963
+                       3: 1281
+                       4: 1963
+                       5: 1395
+                       6: 1963
+                       7: 1509
+                       8: 1963
+                       9: 1960
+                      10: 1960
+                      11: 1960
+                      12: 1623
+                      13: 1963
+                      14: 1732
+                      15: 1963
+                      16: 1846
+                      17: 1963
+                      18: 1960
+                      19: 1960
+                      20: 1960
+                 default: 1963
+            }
+      1068: iconst_0
+      1069: istore        5
+      1071: iload         5
+      1073: bipush        52
+      1075: if_icmpge     3503
+      1078: iload         5
+      1080: iload_1
+      1081: if_icmpeq     1093
+      1084: iload         5
+      1086: aload_0
+      1087: getfield      #26                 // Field flop_card:I
+      1090: if_icmpne     1104
+      1093: aload_0
+      1094: getfield      #13                 // Field beliefs1:[D
+      1097: iload         5
+      1099: dconst_0
+      1100: dastore
+      1101: goto          1122
+      1104: aload_0
+      1105: getfield      #13                 // Field beliefs1:[D
+      1108: iload         5
+      1110: aload_0
+      1111: getfield      #12                 // Field player:LPlayer;
+      1114: iload_1
+      1115: iload         5
+      1117: iload_3
+      1118: invokevirtual #58                 // Method Player.get_prob_of_sequence:(III)D
+      1121: dastore
+      1122: iload         5
+      1124: iload_2
+      1125: if_icmpeq     1137
+      1128: iload         5
+      1130: aload_0
+      1131: getfield      #26                 // Field flop_card:I
+      1134: if_icmpne     1148
+      1137: aload_0
+      1138: getfield      #14                 // Field beliefs2:[D
+      1141: iload         5
+      1143: dconst_0
+      1144: dastore
+      1145: goto          1166
+      1148: aload_0
+      1149: getfield      #14                 // Field beliefs2:[D
+      1152: iload         5
+      1154: aload_0
+      1155: getfield      #12                 // Field player:LPlayer;
+      1158: iload         5
+      1160: iload_2
+      1161: iload_3
+      1162: invokevirtual #58                 // Method Player.get_prob_of_sequence:(III)D
+      1165: dastore
+      1166: iinc          5, 1
+      1169: goto          1071
+      1172: iconst_0
+      1173: istore        5
+      1175: iload         5
+      1177: bipush        52
+      1179: if_icmpge     3503
+      1182: iload         5
+      1184: iload_1
+      1185: if_icmpeq     1197
+      1188: iload         5
+      1190: aload_0
+      1191: getfield      #26                 // Field flop_card:I
+      1194: if_icmpne     1208
+      1197: aload_0
+      1198: getfield      #13                 // Field beliefs1:[D
+      1201: iload         5
+      1203: dconst_0
+      1204: dastore
+      1205: goto          1226
+      1208: aload_0
+      1209: getfield      #13                 // Field beliefs1:[D
+      1212: iload         5
+      1214: aload_0
+      1215: getfield      #12                 // Field player:LPlayer;
+      1218: iload_1
+      1219: iload         5
+      1221: iload_3
+      1222: invokevirtual #58                 // Method Player.get_prob_of_sequence:(III)D
+      1225: dastore
+      1226: iload         5
+      1228: iload_2
+      1229: if_icmpeq     1241
+      1232: iload         5
+      1234: aload_0
+      1235: getfield      #26                 // Field flop_card:I
+      1238: if_icmpne     1252
+      1241: aload_0
+      1242: getfield      #14                 // Field beliefs2:[D
+      1245: iload         5
+      1247: dconst_0
+      1248: dastore
+      1249: goto          1275
+      1252: aload_0
+      1253: getfield      #14                 // Field beliefs2:[D
+      1256: iload         5
+      1258: aload_0
+      1259: getfield      #12                 // Field player:LPlayer;
+      1262: iload         5
+      1264: iload_2
+      1265: iload_3
+      1266: aload_0
+      1267: getfield      #26                 // Field flop_card:I
+      1270: iconst_0
+      1271: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1274: dastore
+      1275: iinc          5, 1
+      1278: goto          1175
+      1281: iconst_0
+      1282: istore        5
+      1284: iload         5
+      1286: bipush        52
+      1288: if_icmpge     3503
+      1291: iload         5
+      1293: iload_1
+      1294: if_icmpeq     1306
+      1297: iload         5
+      1299: aload_0
+      1300: getfield      #26                 // Field flop_card:I
+      1303: if_icmpne     1317
+      1306: aload_0
+      1307: getfield      #13                 // Field beliefs1:[D
+      1310: iload         5
+      1312: dconst_0
+      1313: dastore
+      1314: goto          1340
+      1317: aload_0
+      1318: getfield      #13                 // Field beliefs1:[D
+      1321: iload         5
+      1323: aload_0
+      1324: getfield      #12                 // Field player:LPlayer;
+      1327: iload_1
+      1328: iload         5
+      1330: iload_3
+      1331: aload_0
+      1332: getfield      #26                 // Field flop_card:I
+      1335: iconst_1
+      1336: invokevirtual #60                 // Method Player.get_prob_of_card_player1:(IIIII)D
+      1339: dastore
+      1340: iload         5
+      1342: iload_2
+      1343: if_icmpeq     1355
+      1346: iload         5
+      1348: aload_0
+      1349: getfield      #26                 // Field flop_card:I
+      1352: if_icmpne     1366
+      1355: aload_0
+      1356: getfield      #14                 // Field beliefs2:[D
+      1359: iload         5
+      1361: dconst_0
+      1362: dastore
+      1363: goto          1389
+      1366: aload_0
+      1367: getfield      #14                 // Field beliefs2:[D
+      1370: iload         5
+      1372: aload_0
+      1373: getfield      #12                 // Field player:LPlayer;
+      1376: iload         5
+      1378: iload_2
+      1379: iload_3
+      1380: aload_0
+      1381: getfield      #26                 // Field flop_card:I
+      1384: iconst_0
+      1385: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1388: dastore
+      1389: iinc          5, 1
+      1392: goto          1284
+      1395: iconst_0
+      1396: istore        5
+      1398: iload         5
+      1400: bipush        52
+      1402: if_icmpge     3503
+      1405: iload         5
+      1407: iload_1
+      1408: if_icmpeq     1420
+      1411: iload         5
+      1413: aload_0
+      1414: getfield      #26                 // Field flop_card:I
+      1417: if_icmpne     1431
+      1420: aload_0
+      1421: getfield      #13                 // Field beliefs1:[D
+      1424: iload         5
+      1426: dconst_0
+      1427: dastore
+      1428: goto          1454
+      1431: aload_0
+      1432: getfield      #13                 // Field beliefs1:[D
+      1435: iload         5
+      1437: aload_0
+      1438: getfield      #12                 // Field player:LPlayer;
+      1441: iload_1
+      1442: iload         5
+      1444: iload_3
+      1445: aload_0
+      1446: getfield      #26                 // Field flop_card:I
+      1449: iconst_1
+      1450: invokevirtual #60                 // Method Player.get_prob_of_card_player1:(IIIII)D
+      1453: dastore
+      1454: iload         5
+      1456: iload_2
+      1457: if_icmpeq     1469
+      1460: iload         5
+      1462: aload_0
+      1463: getfield      #26                 // Field flop_card:I
+      1466: if_icmpne     1480
+      1469: aload_0
+      1470: getfield      #14                 // Field beliefs2:[D
+      1473: iload         5
+      1475: dconst_0
+      1476: dastore
+      1477: goto          1503
+      1480: aload_0
+      1481: getfield      #14                 // Field beliefs2:[D
+      1484: iload         5
+      1486: aload_0
+      1487: getfield      #12                 // Field player:LPlayer;
+      1490: iload         5
+      1492: iload_2
+      1493: iload_3
+      1494: aload_0
+      1495: getfield      #26                 // Field flop_card:I
+      1498: iconst_2
+      1499: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1502: dastore
+      1503: iinc          5, 1
+      1506: goto          1398
+      1509: iconst_0
+      1510: istore        5
+      1512: iload         5
+      1514: bipush        52
+      1516: if_icmpge     3503
+      1519: iload         5
+      1521: iload_1
+      1522: if_icmpeq     1534
+      1525: iload         5
+      1527: aload_0
+      1528: getfield      #26                 // Field flop_card:I
+      1531: if_icmpne     1545
+      1534: aload_0
+      1535: getfield      #13                 // Field beliefs1:[D
+      1538: iload         5
+      1540: dconst_0
+      1541: dastore
+      1542: goto          1568
+      1545: aload_0
+      1546: getfield      #13                 // Field beliefs1:[D
+      1549: iload         5
+      1551: aload_0
+      1552: getfield      #12                 // Field player:LPlayer;
+      1555: iload_1
+      1556: iload         5
+      1558: iload_3
+      1559: aload_0
+      1560: getfield      #26                 // Field flop_card:I
+      1563: iconst_3
+      1564: invokevirtual #60                 // Method Player.get_prob_of_card_player1:(IIIII)D
+      1567: dastore
+      1568: iload         5
+      1570: iload_2
+      1571: if_icmpeq     1583
+      1574: iload         5
+      1576: aload_0
+      1577: getfield      #26                 // Field flop_card:I
+      1580: if_icmpne     1594
+      1583: aload_0
+      1584: getfield      #14                 // Field beliefs2:[D
+      1587: iload         5
+      1589: dconst_0
+      1590: dastore
+      1591: goto          1617
+      1594: aload_0
+      1595: getfield      #14                 // Field beliefs2:[D
+      1598: iload         5
+      1600: aload_0
+      1601: getfield      #12                 // Field player:LPlayer;
+      1604: iload         5
+      1606: iload_2
+      1607: iload_3
+      1608: aload_0
+      1609: getfield      #26                 // Field flop_card:I
+      1612: iconst_2
+      1613: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1616: dastore
+      1617: iinc          5, 1
+      1620: goto          1512
+      1623: iconst_0
+      1624: istore        5
+      1626: iload         5
+      1628: bipush        52
+      1630: if_icmpge     3503
+      1633: iload         5
+      1635: iload_1
+      1636: if_icmpeq     1648
+      1639: iload         5
+      1641: aload_0
+      1642: getfield      #26                 // Field flop_card:I
+      1645: if_icmpne     1659
+      1648: aload_0
+      1649: getfield      #13                 // Field beliefs1:[D
+      1652: iload         5
+      1654: dconst_0
+      1655: dastore
+      1656: goto          1677
+      1659: aload_0
+      1660: getfield      #13                 // Field beliefs1:[D
+      1663: iload         5
+      1665: aload_0
+      1666: getfield      #12                 // Field player:LPlayer;
+      1669: iload_1
+      1670: iload         5
+      1672: iload_3
+      1673: invokevirtual #58                 // Method Player.get_prob_of_sequence:(III)D
+      1676: dastore
+      1677: iload         5
+      1679: iload_2
+      1680: if_icmpeq     1692
+      1683: iload         5
+      1685: aload_0
+      1686: getfield      #26                 // Field flop_card:I
+      1689: if_icmpne     1703
+      1692: aload_0
+      1693: getfield      #14                 // Field beliefs2:[D
+      1696: iload         5
+      1698: dconst_0
+      1699: dastore
+      1700: goto          1726
+      1703: aload_0
+      1704: getfield      #14                 // Field beliefs2:[D
+      1707: iload         5
+      1709: aload_0
+      1710: getfield      #12                 // Field player:LPlayer;
+      1713: iload         5
+      1715: iload_2
+      1716: iload_3
+      1717: aload_0
+      1718: getfield      #26                 // Field flop_card:I
+      1721: iconst_1
+      1722: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1725: dastore
+      1726: iinc          5, 1
+      1729: goto          1626
+      1732: iconst_0
+      1733: istore        5
+      1735: iload         5
+      1737: bipush        52
+      1739: if_icmpge     3503
+      1742: iload         5
+      1744: iload_1
+      1745: if_icmpeq     1757
+      1748: iload         5
+      1750: aload_0
+      1751: getfield      #26                 // Field flop_card:I
+      1754: if_icmpne     1768
+      1757: aload_0
+      1758: getfield      #13                 // Field beliefs1:[D
+      1761: iload         5
+      1763: dconst_0
+      1764: dastore
+      1765: goto          1791
+      1768: aload_0
+      1769: getfield      #13                 // Field beliefs1:[D
+      1772: iload         5
+      1774: aload_0
+      1775: getfield      #12                 // Field player:LPlayer;
+      1778: iload_1
+      1779: iload         5
+      1781: iload_3
+      1782: aload_0
+      1783: getfield      #26                 // Field flop_card:I
+      1786: iconst_2
+      1787: invokevirtual #60                 // Method Player.get_prob_of_card_player1:(IIIII)D
+      1790: dastore
+      1791: iload         5
+      1793: iload_2
+      1794: if_icmpeq     1806
+      1797: iload         5
+      1799: aload_0
+      1800: getfield      #26                 // Field flop_card:I
+      1803: if_icmpne     1817
+      1806: aload_0
+      1807: getfield      #14                 // Field beliefs2:[D
+      1810: iload         5
+      1812: dconst_0
+      1813: dastore
+      1814: goto          1840
+      1817: aload_0
+      1818: getfield      #14                 // Field beliefs2:[D
+      1821: iload         5
+      1823: aload_0
+      1824: getfield      #12                 // Field player:LPlayer;
+      1827: iload         5
+      1829: iload_2
+      1830: iload_3
+      1831: aload_0
+      1832: getfield      #26                 // Field flop_card:I
+      1835: iconst_1
+      1836: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1839: dastore
+      1840: iinc          5, 1
+      1843: goto          1735
+      1846: iconst_0
+      1847: istore        5
+      1849: iload         5
+      1851: bipush        52
+      1853: if_icmpge     3503
+      1856: iload         5
+      1858: iload_1
+      1859: if_icmpeq     1871
+      1862: iload         5
+      1864: aload_0
+      1865: getfield      #26                 // Field flop_card:I
+      1868: if_icmpne     1882
+      1871: aload_0
+      1872: getfield      #13                 // Field beliefs1:[D
+      1875: iload         5
+      1877: dconst_0
+      1878: dastore
+      1879: goto          1905
+      1882: aload_0
+      1883: getfield      #13                 // Field beliefs1:[D
+      1886: iload         5
+      1888: aload_0
+      1889: getfield      #12                 // Field player:LPlayer;
+      1892: iload_1
+      1893: iload         5
+      1895: iload_3
+      1896: aload_0
+      1897: getfield      #26                 // Field flop_card:I
+      1900: iconst_2
+      1901: invokevirtual #60                 // Method Player.get_prob_of_card_player1:(IIIII)D
+      1904: dastore
+      1905: iload         5
+      1907: iload_2
+      1908: if_icmpeq     1920
+      1911: iload         5
+      1913: aload_0
+      1914: getfield      #26                 // Field flop_card:I
+      1917: if_icmpne     1931
+      1920: aload_0
+      1921: getfield      #14                 // Field beliefs2:[D
+      1924: iload         5
+      1926: dconst_0
+      1927: dastore
+      1928: goto          1954
+      1931: aload_0
+      1932: getfield      #14                 // Field beliefs2:[D
+      1935: iload         5
+      1937: aload_0
+      1938: getfield      #12                 // Field player:LPlayer;
+      1941: iload         5
+      1943: iload_2
+      1944: iload_3
+      1945: aload_0
+      1946: getfield      #26                 // Field flop_card:I
+      1949: iconst_3
+      1950: invokevirtual #59                 // Method Player.get_prob_of_card_player2:(IIIII)D
+      1953: dastore
+      1954: iinc          5, 1
+      1957: goto          1849
+      1960: goto          3503
+      1963: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1966: ldc           #57                 // String History not yet supported
+      1968: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1971: goto          3503
+      1974: iconst_0
+      1975: istore_3
+      1976: aload_0
+      1977: getfield      #23                 // Field bh1:I
+      1980: tableswitch   { // 2 to 17
+                       2: 2060
+                       3: 2096
+                       4: 2065
+                       5: 2096
+                       6: 2070
+                       7: 2096
+                       8: 2075
+                       9: 2096
+                      10: 2096
+                      11: 2096
+                      12: 2096
+                      13: 2080
+                      14: 2096
+                      15: 2085
+                      16: 2096
+                      17: 2090
+                 default: 2096
+            }
+      2060: iconst_0
+      2061: istore_3
+      2062: goto          2104
+      2065: iconst_1
+      2066: istore_3
+      2067: goto          2104
+      2070: iconst_2
+      2071: istore_3
+      2072: goto          2104
+      2075: iconst_3
+      2076: istore_3
+      2077: goto          2104
+      2080: iconst_4
+      2081: istore_3
+      2082: goto          2104
+      2085: iconst_5
+      2086: istore_3
+      2087: goto          2104
+      2090: bipush        6
+      2092: istore_3
+      2093: goto          2104
+      2096: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      2099: ldc           #42                 // String default reached
+      2101: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      2104: iconst_0
+      2105: istore        4
+      2107: aload_0
+      2108: getfield      #22                 // Field bh2:I
+      2111: tableswitch   { // 2 to 17
+                       2: 2188
+                       3: 2231
+                       4: 2194
+                       5: 2231
+                       6: 2200
+                       7: 2231
+                       8: 2206
+                       9: 2231
+                      10: 2231
+                      11: 2231
+                      12: 2231
+                      13: 2212
+                      14: 2231
+                      15: 2218
+                      16: 2231
+                      17: 2224
+                 default: 2231
+            }
+      2188: iconst_0
+      2189: istore        4
+      2191: goto          2239
+      2194: iconst_1
+      2195: istore        4
+      2197: goto          2239
+      2200: iconst_2
+      2201: istore        4
+      2203: goto          2239
+      2206: iconst_3
+      2207: istore        4
+      2209: goto          2239
+      2212: iconst_4
+      2213: istore        4
+      2215: goto          2239
+      2218: iconst_5
+      2219: istore        4
+      2221: goto          2239
+      2224: bipush        6
+      2226: istore        4
+      2228: goto          2239
+      2231: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      2234: ldc           #42                 // String default reached
+      2236: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      2239: aload_0
+      2240: getfield      #21                 // Field bh3:I
+      2243: tableswitch   { // 0 to 20
+                       0: 2340
+                       1: 2474
+                       2: 3472
+                       3: 2613
+                       4: 3472
+                       5: 2757
+                       6: 3472
+                       7: 2901
+                       8: 3472
+                       9: 3472
+                      10: 3472
+                      11: 3472
+                      12: 3045
+                      13: 3472
+                      14: 3184
+                      15: 3472
+                      16: 3328
+                      17: 3472
+                      18: 3472
+                      19: 3472
+                      20: 3472
+                 default: 3475
+            }
+      2340: iconst_0
+      2341: istore        5
+      2343: iload         5
+      2345: bipush        52
+      2347: if_icmpge     3503
+      2350: iload         5
+      2352: iload_1
+      2353: if_icmpeq     2374
+      2356: iload         5
+      2358: aload_0
+      2359: getfield      #26                 // Field flop_card:I
+      2362: if_icmpeq     2374
+      2365: iload         5
+      2367: aload_0
+      2368: getfield      #27                 // Field turn_card:I
+      2371: if_icmpne     2385
+      2374: aload_0
+      2375: getfield      #13                 // Field beliefs1:[D
+      2378: iload         5
+      2380: dconst_0
+      2381: dastore
+      2382: goto          2409
+      2385: aload_0
+      2386: getfield      #13                 // Field beliefs1:[D
+      2389: iload         5
+      2391: aload_0
+      2392: getfield      #12                 // Field player:LPlayer;
+      2395: iload_1
+      2396: iload         5
+      2398: iload_3
+      2399: aload_0
+      2400: getfield      #26                 // Field flop_card:I
+      2403: iload         4
+      2405: invokevirtual #61                 // Method Player.get_prob_of_sequence:(IIIII)D
+      2408: dastore
+      2409: iload         5
+      2411: iload_2
+      2412: if_icmpeq     2433
+      2415: iload         5
+      2417: aload_0
+      2418: getfield      #26                 // Field flop_card:I
+      2421: if_icmpeq     2433
+      2424: iload         5
+      2426: aload_0
+      2427: getfield      #27                 // Field turn_card:I
+      2430: if_icmpne     2444
+      2433: aload_0
+      2434: getfield      #14                 // Field beliefs2:[D
+      2437: iload         5
+      2439: dconst_0
+      2440: dastore
+      2441: goto          2468
+      2444: aload_0
+      2445: getfield      #14                 // Field beliefs2:[D
+      2448: iload         5
+      2450: aload_0
+      2451: getfield      #12                 // Field player:LPlayer;
+      2454: iload         5
+      2456: iload_2
+      2457: iload_3
+      2458: aload_0
+      2459: getfield      #26                 // Field flop_card:I
+      2462: iload         4
+      2464: invokevirtual #61                 // Method Player.get_prob_of_sequence:(IIIII)D
+      2467: dastore
+      2468: iinc          5, 1
+      2471: goto          2343
+      2474: iconst_0
+      2475: istore        5
+      2477: iload         5
+      2479: bipush        52
+      2481: if_icmpge     3503
+      2484: iload         5
+      2486: iload_1
+      2487: if_icmpeq     2508
+      2490: iload         5
+      2492: aload_0
+      2493: getfield      #26                 // Field flop_card:I
+      2496: if_icmpeq     2508
+      2499: iload         5
+      2501: aload_0
+      2502: getfield      #27                 // Field turn_card:I
+      2505: if_icmpne     2519
+      2508: aload_0
+      2509: getfield      #13                 // Field beliefs1:[D
+      2512: iload         5
+      2514: dconst_0
+      2515: dastore
+      2516: goto          2543
+      2519: aload_0
+      2520: getfield      #13                 // Field beliefs1:[D
+      2523: iload         5
+      2525: aload_0
+      2526: getfield      #12                 // Field player:LPlayer;
+      2529: iload_1
+      2530: iload         5
+      2532: iload_3
+      2533: aload_0
+      2534: getfield      #26                 // Field flop_card:I
+      2537: iload         4
+      2539: invokevirtual #61                 // Method Player.get_prob_of_sequence:(IIIII)D
+      2542: dastore
+      2543: iload         5
+      2545: iload_2
+      2546: if_icmpeq     2567
+      2549: iload         5
+      2551: aload_0
+      2552: getfield      #26                 // Field flop_card:I
+      2555: if_icmpeq     2567
+      2558: iload         5
+      2560: aload_0
+      2561: getfield      #27                 // Field turn_card:I
+      2564: if_icmpne     2578
+      2567: aload_0
+      2568: getfield      #14                 // Field beliefs2:[D
+      2571: iload         5
+      2573: dconst_0
+      2574: dastore
+      2575: goto          2607
+      2578: aload_0
+      2579: getfield      #14                 // Field beliefs2:[D
+      2582: iload         5
+      2584: aload_0
+      2585: getfield      #12                 // Field player:LPlayer;
+      2588: iload         5
+      2590: iload_2
+      2591: iload_3
+      2592: aload_0
+      2593: getfield      #26                 // Field flop_card:I
+      2596: iload         4
+      2598: aload_0
+      2599: getfield      #27                 // Field turn_card:I
+      2602: iconst_0
+      2603: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      2606: dastore
+      2607: iinc          5, 1
+      2610: goto          2477
+      2613: iconst_0
+      2614: istore        5
+      2616: iload         5
+      2618: bipush        52
+      2620: if_icmpge     3503
+      2623: iload         5
+      2625: iload_1
+      2626: if_icmpeq     2647
+      2629: iload         5
+      2631: aload_0
+      2632: getfield      #26                 // Field flop_card:I
+      2635: if_icmpeq     2647
+      2638: iload         5
+      2640: aload_0
+      2641: getfield      #27                 // Field turn_card:I
+      2644: if_icmpne     2658
+      2647: aload_0
+      2648: getfield      #13                 // Field beliefs1:[D
+      2651: iload         5
+      2653: dconst_0
+      2654: dastore
+      2655: goto          2687
+      2658: aload_0
+      2659: getfield      #13                 // Field beliefs1:[D
+      2662: iload         5
+      2664: aload_0
+      2665: getfield      #12                 // Field player:LPlayer;
+      2668: iload_1
+      2669: iload         5
+      2671: iload_3
+      2672: aload_0
+      2673: getfield      #26                 // Field flop_card:I
+      2676: iload         4
+      2678: aload_0
+      2679: getfield      #27                 // Field turn_card:I
+      2682: iconst_1
+      2683: invokevirtual #63                 // Method Player.get_prob_of_card_player1:(IIIIIII)D
+      2686: dastore
+      2687: iload         5
+      2689: iload_2
+      2690: if_icmpeq     2711
+      2693: iload         5
+      2695: aload_0
+      2696: getfield      #26                 // Field flop_card:I
+      2699: if_icmpeq     2711
+      2702: iload         5
+      2704: aload_0
+      2705: getfield      #27                 // Field turn_card:I
+      2708: if_icmpne     2722
+      2711: aload_0
+      2712: getfield      #14                 // Field beliefs2:[D
+      2715: iload         5
+      2717: dconst_0
+      2718: dastore
+      2719: goto          2751
+      2722: aload_0
+      2723: getfield      #14                 // Field beliefs2:[D
+      2726: iload         5
+      2728: aload_0
+      2729: getfield      #12                 // Field player:LPlayer;
+      2732: iload         5
+      2734: iload_2
+      2735: iload_3
+      2736: aload_0
+      2737: getfield      #26                 // Field flop_card:I
+      2740: iload         4
+      2742: aload_0
+      2743: getfield      #27                 // Field turn_card:I
+      2746: iconst_0
+      2747: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      2750: dastore
+      2751: iinc          5, 1
+      2754: goto          2616
+      2757: iconst_0
+      2758: istore        5
+      2760: iload         5
+      2762: bipush        52
+      2764: if_icmpge     3503
+      2767: iload         5
+      2769: iload_1
+      2770: if_icmpeq     2791
+      2773: iload         5
+      2775: aload_0
+      2776: getfield      #26                 // Field flop_card:I
+      2779: if_icmpeq     2791
+      2782: iload         5
+      2784: aload_0
+      2785: getfield      #27                 // Field turn_card:I
+      2788: if_icmpne     2802
+      2791: aload_0
+      2792: getfield      #13                 // Field beliefs1:[D
+      2795: iload         5
+      2797: dconst_0
+      2798: dastore
+      2799: goto          2831
+      2802: aload_0
+      2803: getfield      #13                 // Field beliefs1:[D
+      2806: iload         5
+      2808: aload_0
+      2809: getfield      #12                 // Field player:LPlayer;
+      2812: iload_1
+      2813: iload         5
+      2815: iload_3
+      2816: aload_0
+      2817: getfield      #26                 // Field flop_card:I
+      2820: iload         4
+      2822: aload_0
+      2823: getfield      #27                 // Field turn_card:I
+      2826: iconst_1
+      2827: invokevirtual #63                 // Method Player.get_prob_of_card_player1:(IIIIIII)D
+      2830: dastore
+      2831: iload         5
+      2833: iload_2
+      2834: if_icmpeq     2855
+      2837: iload         5
+      2839: aload_0
+      2840: getfield      #26                 // Field flop_card:I
+      2843: if_icmpeq     2855
+      2846: iload         5
+      2848: aload_0
+      2849: getfield      #27                 // Field turn_card:I
+      2852: if_icmpne     2866
+      2855: aload_0
+      2856: getfield      #14                 // Field beliefs2:[D
+      2859: iload         5
+      2861: dconst_0
+      2862: dastore
+      2863: goto          2895
+      2866: aload_0
+      2867: getfield      #14                 // Field beliefs2:[D
+      2870: iload         5
+      2872: aload_0
+      2873: getfield      #12                 // Field player:LPlayer;
+      2876: iload         5
+      2878: iload_2
+      2879: iload_3
+      2880: aload_0
+      2881: getfield      #26                 // Field flop_card:I
+      2884: iload         4
+      2886: aload_0
+      2887: getfield      #27                 // Field turn_card:I
+      2890: iconst_2
+      2891: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      2894: dastore
+      2895: iinc          5, 1
+      2898: goto          2760
+      2901: iconst_0
+      2902: istore        5
+      2904: iload         5
+      2906: bipush        52
+      2908: if_icmpge     3503
+      2911: iload         5
+      2913: iload_1
+      2914: if_icmpeq     2935
+      2917: iload         5
+      2919: aload_0
+      2920: getfield      #26                 // Field flop_card:I
+      2923: if_icmpeq     2935
+      2926: iload         5
+      2928: aload_0
+      2929: getfield      #27                 // Field turn_card:I
+      2932: if_icmpne     2946
+      2935: aload_0
+      2936: getfield      #13                 // Field beliefs1:[D
+      2939: iload         5
+      2941: dconst_0
+      2942: dastore
+      2943: goto          2975
+      2946: aload_0
+      2947: getfield      #13                 // Field beliefs1:[D
+      2950: iload         5
+      2952: aload_0
+      2953: getfield      #12                 // Field player:LPlayer;
+      2956: iload_1
+      2957: iload         5
+      2959: iload_3
+      2960: aload_0
+      2961: getfield      #26                 // Field flop_card:I
+      2964: iload         4
+      2966: aload_0
+      2967: getfield      #27                 // Field turn_card:I
+      2970: iconst_3
+      2971: invokevirtual #63                 // Method Player.get_prob_of_card_player1:(IIIIIII)D
+      2974: dastore
+      2975: iload         5
+      2977: iload_2
+      2978: if_icmpeq     2999
+      2981: iload         5
+      2983: aload_0
+      2984: getfield      #26                 // Field flop_card:I
+      2987: if_icmpeq     2999
+      2990: iload         5
+      2992: aload_0
+      2993: getfield      #27                 // Field turn_card:I
+      2996: if_icmpne     3010
+      2999: aload_0
+      3000: getfield      #14                 // Field beliefs2:[D
+      3003: iload         5
+      3005: dconst_0
+      3006: dastore
+      3007: goto          3039
+      3010: aload_0
+      3011: getfield      #14                 // Field beliefs2:[D
+      3014: iload         5
+      3016: aload_0
+      3017: getfield      #12                 // Field player:LPlayer;
+      3020: iload         5
+      3022: iload_2
+      3023: iload_3
+      3024: aload_0
+      3025: getfield      #26                 // Field flop_card:I
+      3028: iload         4
+      3030: aload_0
+      3031: getfield      #27                 // Field turn_card:I
+      3034: iconst_2
+      3035: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      3038: dastore
+      3039: iinc          5, 1
+      3042: goto          2904
+      3045: iconst_0
+      3046: istore        5
+      3048: iload         5
+      3050: bipush        52
+      3052: if_icmpge     3503
+      3055: iload         5
+      3057: iload_1
+      3058: if_icmpeq     3079
+      3061: iload         5
+      3063: aload_0
+      3064: getfield      #26                 // Field flop_card:I
+      3067: if_icmpeq     3079
+      3070: iload         5
+      3072: aload_0
+      3073: getfield      #27                 // Field turn_card:I
+      3076: if_icmpne     3090
+      3079: aload_0
+      3080: getfield      #13                 // Field beliefs1:[D
+      3083: iload         5
+      3085: dconst_0
+      3086: dastore
+      3087: goto          3114
+      3090: aload_0
+      3091: getfield      #13                 // Field beliefs1:[D
+      3094: iload         5
+      3096: aload_0
+      3097: getfield      #12                 // Field player:LPlayer;
+      3100: iload_1
+      3101: iload         5
+      3103: iload_3
+      3104: aload_0
+      3105: getfield      #26                 // Field flop_card:I
+      3108: iload         4
+      3110: invokevirtual #61                 // Method Player.get_prob_of_sequence:(IIIII)D
+      3113: dastore
+      3114: iload         5
+      3116: iload_2
+      3117: if_icmpeq     3138
+      3120: iload         5
+      3122: aload_0
+      3123: getfield      #26                 // Field flop_card:I
+      3126: if_icmpeq     3138
+      3129: iload         5
+      3131: aload_0
+      3132: getfield      #27                 // Field turn_card:I
+      3135: if_icmpne     3149
+      3138: aload_0
+      3139: getfield      #14                 // Field beliefs2:[D
+      3142: iload         5
+      3144: dconst_0
+      3145: dastore
+      3146: goto          3178
+      3149: aload_0
+      3150: getfield      #14                 // Field beliefs2:[D
+      3153: iload         5
+      3155: aload_0
+      3156: getfield      #12                 // Field player:LPlayer;
+      3159: iload         5
+      3161: iload_2
+      3162: iload_3
+      3163: aload_0
+      3164: getfield      #26                 // Field flop_card:I
+      3167: iload         4
+      3169: aload_0
+      3170: getfield      #27                 // Field turn_card:I
+      3173: iconst_1
+      3174: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      3177: dastore
+      3178: iinc          5, 1
+      3181: goto          3048
+      3184: iconst_0
+      3185: istore        5
+      3187: iload         5
+      3189: bipush        52
+      3191: if_icmpge     3503
+      3194: iload         5
+      3196: iload_1
+      3197: if_icmpeq     3218
+      3200: iload         5
+      3202: aload_0
+      3203: getfield      #26                 // Field flop_card:I
+      3206: if_icmpeq     3218
+      3209: iload         5
+      3211: aload_0
+      3212: getfield      #27                 // Field turn_card:I
+      3215: if_icmpne     3229
+      3218: aload_0
+      3219: getfield      #13                 // Field beliefs1:[D
+      3222: iload         5
+      3224: dconst_0
+      3225: dastore
+      3226: goto          3258
+      3229: aload_0
+      3230: getfield      #13                 // Field beliefs1:[D
+      3233: iload         5
+      3235: aload_0
+      3236: getfield      #12                 // Field player:LPlayer;
+      3239: iload_1
+      3240: iload         5
+      3242: iload_3
+      3243: aload_0
+      3244: getfield      #26                 // Field flop_card:I
+      3247: iload         4
+      3249: aload_0
+      3250: getfield      #27                 // Field turn_card:I
+      3253: iconst_2
+      3254: invokevirtual #63                 // Method Player.get_prob_of_card_player1:(IIIIIII)D
+      3257: dastore
+      3258: iload         5
+      3260: iload_2
+      3261: if_icmpeq     3282
+      3264: iload         5
+      3266: aload_0
+      3267: getfield      #26                 // Field flop_card:I
+      3270: if_icmpeq     3282
+      3273: iload         5
+      3275: aload_0
+      3276: getfield      #27                 // Field turn_card:I
+      3279: if_icmpne     3293
+      3282: aload_0
+      3283: getfield      #14                 // Field beliefs2:[D
+      3286: iload         5
+      3288: dconst_0
+      3289: dastore
+      3290: goto          3322
+      3293: aload_0
+      3294: getfield      #14                 // Field beliefs2:[D
+      3297: iload         5
+      3299: aload_0
+      3300: getfield      #12                 // Field player:LPlayer;
+      3303: iload         5
+      3305: iload_2
+      3306: iload_3
+      3307: aload_0
+      3308: getfield      #26                 // Field flop_card:I
+      3311: iload         4
+      3313: aload_0
+      3314: getfield      #27                 // Field turn_card:I
+      3317: iconst_1
+      3318: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      3321: dastore
+      3322: iinc          5, 1
+      3325: goto          3187
+      3328: iconst_0
+      3329: istore        5
+      3331: iload         5
+      3333: bipush        52
+      3335: if_icmpge     3503
+      3338: iload         5
+      3340: iload_1
+      3341: if_icmpeq     3362
+      3344: iload         5
+      3346: aload_0
+      3347: getfield      #26                 // Field flop_card:I
+      3350: if_icmpeq     3362
+      3353: iload         5
+      3355: aload_0
+      3356: getfield      #27                 // Field turn_card:I
+      3359: if_icmpne     3373
+      3362: aload_0
+      3363: getfield      #13                 // Field beliefs1:[D
+      3366: iload         5
+      3368: dconst_0
+      3369: dastore
+      3370: goto          3402
+      3373: aload_0
+      3374: getfield      #13                 // Field beliefs1:[D
+      3377: iload         5
+      3379: aload_0
+      3380: getfield      #12                 // Field player:LPlayer;
+      3383: iload_1
+      3384: iload         5
+      3386: iload_3
+      3387: aload_0
+      3388: getfield      #26                 // Field flop_card:I
+      3391: iload         4
+      3393: aload_0
+      3394: getfield      #27                 // Field turn_card:I
+      3397: iconst_2
+      3398: invokevirtual #63                 // Method Player.get_prob_of_card_player1:(IIIIIII)D
+      3401: dastore
+      3402: iload         5
+      3404: iload_2
+      3405: if_icmpeq     3426
+      3408: iload         5
+      3410: aload_0
+      3411: getfield      #26                 // Field flop_card:I
+      3414: if_icmpeq     3426
+      3417: iload         5
+      3419: aload_0
+      3420: getfield      #27                 // Field turn_card:I
+      3423: if_icmpne     3437
+      3426: aload_0
+      3427: getfield      #14                 // Field beliefs2:[D
+      3430: iload         5
+      3432: dconst_0
+      3433: dastore
+      3434: goto          3466
+      3437: aload_0
+      3438: getfield      #14                 // Field beliefs2:[D
+      3441: iload         5
+      3443: aload_0
+      3444: getfield      #12                 // Field player:LPlayer;
+      3447: iload         5
+      3449: iload_2
+      3450: iload_3
+      3451: aload_0
+      3452: getfield      #26                 // Field flop_card:I
+      3455: iload         4
+      3457: aload_0
+      3458: getfield      #27                 // Field turn_card:I
+      3461: iconst_3
+      3462: invokevirtual #62                 // Method Player.get_prob_of_card_player2:(IIIIIII)D
+      3465: dastore
+      3466: iinc          5, 1
+      3469: goto          3331
+      3472: goto          3503
+      3475: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      3478: new           #45                 // class java/lang/StringBuffer
+      3481: dup
+      3482: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+      3485: ldc           #64                 // String History not yet supported:
+      3487: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      3490: aload_0
+      3491: getfield      #21                 // Field bh3:I
+      3494: invokevirtual #49                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+      3497: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+      3500: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      3503: dconst_0
+      3504: dstore        5
+      3506: dconst_0
+      3507: dstore        7
+      3509: iconst_1
+      3510: istore        9
+      3512: iconst_1
+      3513: istore        10
+      3515: iconst_0
+      3516: istore        11
+      3518: iload         11
+      3520: bipush        52
+      3522: if_icmpge     3555
+      3525: dload         5
+      3527: aload_0
+      3528: getfield      #13                 // Field beliefs1:[D
+      3531: iload         11
+      3533: daload
+      3534: dadd
+      3535: dstore        5
+      3537: dload         7
+      3539: aload_0
+      3540: getfield      #14                 // Field beliefs2:[D
+      3543: iload         11
+      3545: daload
+      3546: dadd
+      3547: dstore        7
+      3549: iinc          11, 1
+      3552: goto          3518
+      3555: dload         5
+      3557: dconst_0
+      3558: dcmpl
+      3559: ifne          3592
+      3562: iconst_0
+      3563: istore        11
+      3565: iload         11
+      3567: bipush        52
+      3569: if_icmpge     3586
+      3572: aload_0
+      3573: getfield      #13                 // Field beliefs1:[D
+      3576: iload         11
+      3578: dconst_0
+      3579: dastore
+      3580: iinc          11, 1
+      3583: goto          3565
+      3586: dconst_1
+      3587: dstore        5
+      3589: iconst_0
+      3590: istore        9
+      3592: dload         7
+      3594: dconst_0
+      3595: dcmpl
+      3596: ifne          3629
+      3599: iconst_0
+      3600: istore        11
+      3602: iload         11
+      3604: bipush        52
+      3606: if_icmpge     3623
+      3609: aload_0
+      3610: getfield      #14                 // Field beliefs2:[D
+      3613: iload         11
+      3615: dconst_0
+      3616: dastore
+      3617: iinc          11, 1
+      3620: goto          3602
+      3623: dconst_1
+      3624: dstore        7
+      3626: iconst_0
+      3627: istore        10
+      3629: iconst_0
+      3630: istore        11
+      3632: iload         11
+      3634: bipush        52
+      3636: if_icmpge     3669
+      3639: aload_0
+      3640: getfield      #13                 // Field beliefs1:[D
+      3643: iload         11
+      3645: dup2
+      3646: daload
+      3647: dload         5
+      3649: ddiv
+      3650: dastore
+      3651: aload_0
+      3652: getfield      #14                 // Field beliefs2:[D
+      3655: iload         11
+      3657: dup2
+      3658: daload
+      3659: dload         7
+      3661: ddiv
+      3662: dastore
+      3663: iinc          11, 1
+      3666: goto          3632
+      3669: aload_0
+      3670: getfield      #20                 // Field round:I
+      3673: tableswitch   { // 0 to 2
+                       0: 3700
+                       1: 3729
+                       2: 3766
+                 default: 3766
+            }
+      3700: aload_0
+      3701: getfield      #12                 // Field player:LPlayer;
+      3704: aload_0
+      3705: getfield      #29                 // Field player_card:I
+      3708: invokevirtual #65                 // Method Player.get_partition:(I)Ljava/util/HashMap;
+      3711: astore        11
+      3713: aload_0
+      3714: getfield      #12                 // Field player:LPlayer;
+      3717: aload_0
+      3718: getfield      #28                 // Field opp_card:I
+      3721: invokevirtual #65                 // Method Player.get_partition:(I)Ljava/util/HashMap;
+      3724: astore        12
+      3726: goto          3808
+      3729: aload_0
+      3730: getfield      #12                 // Field player:LPlayer;
+      3733: aload_0
+      3734: getfield      #29                 // Field player_card:I
+      3737: aload_0
+      3738: getfield      #26                 // Field flop_card:I
+      3741: invokevirtual #66                 // Method Player.get_partition:(II)Ljava/util/HashMap;
+      3744: astore        11
+      3746: aload_0
+      3747: getfield      #12                 // Field player:LPlayer;
+      3750: aload_0
+      3751: getfield      #28                 // Field opp_card:I
+      3754: aload_0
+      3755: getfield      #26                 // Field flop_card:I
+      3758: invokevirtual #66                 // Method Player.get_partition:(II)Ljava/util/HashMap;
+      3761: astore        12
+      3763: goto          3808
+      3766: aload_0
+      3767: getfield      #12                 // Field player:LPlayer;
+      3770: aload_0
+      3771: getfield      #29                 // Field player_card:I
+      3774: aload_0
+      3775: getfield      #26                 // Field flop_card:I
+      3778: aload_0
+      3779: getfield      #27                 // Field turn_card:I
+      3782: invokevirtual #67                 // Method Player.get_partition:(III)Ljava/util/HashMap;
+      3785: astore        11
+      3787: aload_0
+      3788: getfield      #12                 // Field player:LPlayer;
+      3791: aload_0
+      3792: getfield      #28                 // Field opp_card:I
+      3795: aload_0
+      3796: getfield      #26                 // Field flop_card:I
+      3799: aload_0
+      3800: getfield      #27                 // Field turn_card:I
+      3803: invokevirtual #67                 // Method Player.get_partition:(III)Ljava/util/HashMap;
+      3806: astore        12
+      3808: aload_0
+      3809: getfield      #19                 // Field dealer:I
+      3812: ifne          3848
+      3815: aload_0
+      3816: getfield      #2                  // Field player_table:LBeliefTable;
+      3819: aload_0
+      3820: getfield      #14                 // Field beliefs2:[D
+      3823: iload         10
+      3825: aload         11
+      3827: invokevirtual #68                 // Method BeliefTable.update_beliefs:([DZLjava/util/HashMap;)V
+      3830: aload_0
+      3831: getfield      #3                  // Field opponent_table:LBeliefTable;
+      3834: aload_0
+      3835: getfield      #13                 // Field beliefs1:[D
+      3838: iload         9
+      3840: aload         12
+      3842: invokevirtual #68                 // Method BeliefTable.update_beliefs:([DZLjava/util/HashMap;)V
+      3845: goto          3878
+      3848: aload_0
+      3849: getfield      #2                  // Field player_table:LBeliefTable;
+      3852: aload_0
+      3853: getfield      #13                 // Field beliefs1:[D
+      3856: iload         9
+      3858: aload         11
+      3860: invokevirtual #68                 // Method BeliefTable.update_beliefs:([DZLjava/util/HashMap;)V
+      3863: aload_0
+      3864: getfield      #3                  // Field opponent_table:LBeliefTable;
+      3867: aload_0
+      3868: getfield      #14                 // Field beliefs2:[D
+      3871: iload         10
+      3873: aload         12
+      3875: invokevirtual #68                 // Method BeliefTable.update_beliefs:([DZLjava/util/HashMap;)V
+      3878: return
+
+  public void update_button_visibility();
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field dealt:Z
+         4: ifeq          14
+         7: aload_0
+         8: getfield      #24                 // Field game_over:Z
+        11: ifeq          40
+        14: aload_0
+        15: aload_0
+        16: aload_0
+        17: aload_0
+        18: aload_0
+        19: iconst_0
+        20: dup_x1
+        21: putfield      #32                 // Field can_raise:Z
+        24: dup_x1
+        25: putfield      #35                 // Field can_bet:Z
+        28: dup_x1
+        29: putfield      #33                 // Field can_fold:Z
+        32: dup_x1
+        33: putfield      #36                 // Field can_check:Z
+        36: putfield      #34                 // Field can_call:Z
+        39: return
+        40: iconst_0
+        41: istore_1
+        42: aload_0
+        43: getfield      #20                 // Field round:I
+        46: tableswitch   { // 0 to 2
+                       0: 72
+                       1: 80
+                       2: 88
+                 default: 93
+            }
+        72: aload_0
+        73: getfield      #23                 // Field bh1:I
+        76: istore_1
+        77: goto          93
+        80: aload_0
+        81: getfield      #22                 // Field bh2:I
+        84: istore_1
+        85: goto          93
+        88: aload_0
+        89: getfield      #21                 // Field bh3:I
+        92: istore_1
+        93: iload_1
+        94: tableswitch   { // 0 to 20
+                       0: 192
+                       1: 192
+                       2: 276
+                       3: 220
+                       4: 276
+                       5: 220
+                       6: 276
+                       7: 248
+                       8: 276
+                       9: 276
+                      10: 276
+                      11: 276
+                      12: 220
+                      13: 276
+                      14: 220
+                      15: 276
+                      16: 248
+                      17: 276
+                      18: 276
+                      19: 276
+                      20: 276
+                 default: 301
+            }
+       192: aload_0
+       193: aload_0
+       194: iconst_1
+       195: dup_x1
+       196: putfield      #35                 // Field can_bet:Z
+       199: putfield      #36                 // Field can_check:Z
+       202: aload_0
+       203: aload_0
+       204: aload_0
+       205: iconst_0
+       206: dup_x1
+       207: putfield      #32                 // Field can_raise:Z
+       210: dup_x1
+       211: putfield      #33                 // Field can_fold:Z
+       214: putfield      #34                 // Field can_call:Z
+       217: goto          301
+       220: aload_0
+       221: aload_0
+       222: aload_0
+       223: iconst_1
+       224: dup_x1
+       225: putfield      #32                 // Field can_raise:Z
+       228: dup_x1
+       229: putfield      #33                 // Field can_fold:Z
+       232: putfield      #34                 // Field can_call:Z
+       235: aload_0
+       236: aload_0
+       237: iconst_0
+       238: dup_x1
+       239: putfield      #35                 // Field can_bet:Z
+       242: putfield      #36                 // Field can_check:Z
+       245: goto          301
+       248: aload_0
+       249: aload_0
+       250: iconst_1
+       251: dup_x1
+       252: putfield      #33                 // Field can_fold:Z
+       255: putfield      #34                 // Field can_call:Z
+       258: aload_0
+       259: aload_0
+       260: aload_0
+       261: iconst_0
+       262: dup_x1
+       263: putfield      #32                 // Field can_raise:Z
+       266: dup_x1
+       267: putfield      #35                 // Field can_bet:Z
+       270: putfield      #36                 // Field can_check:Z
+       273: goto          301
+       276: aload_0
+       277: aload_0
+       278: aload_0
+       279: aload_0
+       280: aload_0
+       281: iconst_0
+       282: dup_x1
+       283: putfield      #32                 // Field can_raise:Z
+       286: dup_x1
+       287: putfield      #33                 // Field can_fold:Z
+       290: dup_x1
+       291: putfield      #34                 // Field can_call:Z
+       294: dup_x1
+       295: putfield      #35                 // Field can_bet:Z
+       298: putfield      #36                 // Field can_check:Z
+       301: return
+
+  private void advance_round();
+    Code:
+         0: aload_0
+         1: getfield      #20                 // Field round:I
+         4: iconst_2
+         5: if_icmpne     15
+         8: aload_0
+         9: invokevirtual #69                 // Method do_showdown:()V
+        12: goto          89
+        15: aload_0
+        16: aload_0
+        17: iconst_0
+        18: dup_x1
+        19: putfield      #32                 // Field can_raise:Z
+        22: putfield      #34                 // Field can_call:Z
+        25: aload_0
+        26: aload_0
+        27: aload_0
+        28: iconst_1
+        29: dup_x1
+        30: putfield      #35                 // Field can_bet:Z
+        33: dup_x1
+        34: putfield      #33                 // Field can_fold:Z
+        37: putfield      #36                 // Field can_check:Z
+        40: aload_0
+        41: dup
+        42: getfield      #20                 // Field round:I
+        45: iconst_1
+        46: iadd
+        47: putfield      #20                 // Field round:I
+        50: aload_0
+        51: getfield      #20                 // Field round:I
+        54: iconst_1
+        55: if_icmpne     66
+        58: aload_0
+        59: iconst_1
+        60: putfield      #38                 // Field do_flop:Z
+        63: goto          79
+        66: aload_0
+        67: getfield      #20                 // Field round:I
+        70: iconst_2
+        71: if_icmpne     79
+        74: aload_0
+        75: iconst_1
+        76: putfield      #37                 // Field do_turn:Z
+        79: aload_0
+        80: iconst_1
+        81: aload_0
+        82: getfield      #19                 // Field dealer:I
+        85: isub
+        86: putfield      #31                 // Field player_turn:I
+        89: return
+
+  public void do_showdown();
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: putfield      #24                 // Field game_over:Z
+         5: aload_0
+         6: getfield      #29                 // Field player_card:I
+         9: aload_0
+        10: getfield      #28                 // Field opp_card:I
+        13: aload_0
+        14: getfield      #26                 // Field flop_card:I
+        17: aload_0
+        18: getfield      #27                 // Field turn_card:I
+        21: invokestatic  #70                 // Method Compare.compare_hands:(IIII)I
+        24: istore_1
+        25: aload_0
+        26: new           #45                 // class java/lang/StringBuffer
+        29: dup
+        30: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+        33: ldc           #71                 // String Player shows
+        35: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        38: getstatic     #72                 // Field Compare.player1:Ljava/lang/String;
+        41: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        44: ldc           #73                 // String \n
+        46: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        49: ldc           #74                 // String Computer shows
+        51: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        54: getstatic     #75                 // Field Compare.player2:Ljava/lang/String;
+        57: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        60: ldc           #73                 // String \n
+        62: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        65: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+        68: putfield      #9                  // Field winner:Ljava/lang/String;
+        71: iload_1
+        72: iconst_1
+        73: if_icmpne     130
+        76: new           #45                 // class java/lang/StringBuffer
+        79: dup
+        80: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+        83: aload_0
+        84: dup_x1
+        85: getfield      #9                  // Field winner:Ljava/lang/String;
+        88: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        91: ldc           #52                 // String Player wins
+        93: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        96: aload_0
+        97: getfield      #18                 // Field pot:I
+       100: invokevirtual #49                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+       103: ldc           #50                 // String  chips from the pot.\n
+       105: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       108: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+       111: putfield      #9                  // Field winner:Ljava/lang/String;
+       114: aload_0
+       115: dup
+       116: getfield      #16                 // Field player_chips:I
+       119: aload_0
+       120: getfield      #18                 // Field pot:I
+       123: iadd
+       124: putfield      #16                 // Field player_chips:I
+       127: goto          245
+       130: iload_1
+       131: iconst_m1
+       132: if_icmpne     189
+       135: new           #45                 // class java/lang/StringBuffer
+       138: dup
+       139: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+       142: aload_0
+       143: dup_x1
+       144: getfield      #9                  // Field winner:Ljava/lang/String;
+       147: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       150: ldc           #47                 // String Computer wins
+       152: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       155: aload_0
+       156: getfield      #18                 // Field pot:I
+       159: invokevirtual #49                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+       162: ldc           #50                 // String  chips from the pot.\n
+       164: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       167: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+       170: putfield      #9                  // Field winner:Ljava/lang/String;
+       173: aload_0
+       174: dup
+       175: getfield      #17                 // Field opp_chips:I
+       178: aload_0
+       179: getfield      #18                 // Field pot:I
+       182: iadd
+       183: putfield      #17                 // Field opp_chips:I
+       186: goto          245
+       189: new           #45                 // class java/lang/StringBuffer
+       192: dup
+       193: invokespecial #46                 // Method java/lang/StringBuffer."<init>":()V
+       196: aload_0
+       197: dup_x1
+       198: getfield      #9                  // Field winner:Ljava/lang/String;
+       201: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       204: ldc           #76                 // String Players split the pot.\n
+       206: invokevirtual #48                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+       209: invokevirtual #51                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+       212: putfield      #9                  // Field winner:Ljava/lang/String;
+       215: aload_0
+       216: dup
+       217: getfield      #16                 // Field player_chips:I
+       220: aload_0
+       221: getfield      #18                 // Field pot:I
+       224: iconst_2
+       225: idiv
+       226: iadd
+       227: putfield      #16                 // Field player_chips:I
+       230: aload_0
+       231: dup
+       232: getfield      #17                 // Field opp_chips:I
+       235: aload_0
+       236: getfield      #18                 // Field pot:I
+       239: iconst_2
+       240: idiv
+       241: iadd
+       242: putfield      #17                 // Field opp_chips:I
+       245: return
+
+  public java.lang.String opponent_move();
+    Code:
+         0: iconst_0
+         1: istore_1
+         2: iconst_0
+         3: istore_2
+         4: iconst_0
+         5: istore_3
+         6: iconst_0
+         7: istore        4
+         9: aload_0
+        10: getfield      #20                 // Field round:I
+        13: tableswitch   { // 0 to 2
+                       0: 40
+                       1: 267
+                       2: 659
+                 default: 1228
+            }
+        40: aload_0
+        41: getfield      #23                 // Field bh1:I
+        44: tableswitch   { // 0 to 16
+                       0: 128
+                       1: 192
+                       2: 256
+                       3: 144
+                       4: 256
+                       5: 224
+                       6: 256
+                       7: 176
+                       8: 256
+                       9: 256
+                      10: 256
+                      11: 256
+                      12: 208
+                      13: 256
+                      14: 160
+                      15: 256
+                      16: 240
+                 default: 256
+            }
+       128: aload_0
+       129: getfield      #12                 // Field player:LPlayer;
+       132: aload_0
+       133: getfield      #28                 // Field opp_card:I
+       136: iconst_0
+       137: invokevirtual #77                 // Method Player.get_strategy1:(II)I
+       140: istore_1
+       141: goto          1228
+       144: aload_0
+       145: getfield      #12                 // Field player:LPlayer;
+       148: aload_0
+       149: getfield      #28                 // Field opp_card:I
+       152: iconst_1
+       153: invokevirtual #77                 // Method Player.get_strategy1:(II)I
+       156: istore_1
+       157: goto          1228
+       160: aload_0
+       161: getfield      #12                 // Field player:LPlayer;
+       164: aload_0
+       165: getfield      #28                 // Field opp_card:I
+       168: iconst_2
+       169: invokevirtual #77                 // Method Player.get_strategy1:(II)I
+       172: istore_1
+       173: goto          1228
+       176: aload_0
+       177: getfield      #12                 // Field player:LPlayer;
+       180: aload_0
+       181: getfield      #28                 // Field opp_card:I
+       184: iconst_3
+       185: invokevirtual #77                 // Method Player.get_strategy1:(II)I
+       188: istore_1
+       189: goto          1228
+       192: aload_0
+       193: getfield      #12                 // Field player:LPlayer;
+       196: aload_0
+       197: getfield      #28                 // Field opp_card:I
+       200: iconst_0
+       201: invokevirtual #78                 // Method Player.get_strategy2:(II)I
+       204: istore_1
+       205: goto          1228
+       208: aload_0
+       209: getfield      #12                 // Field player:LPlayer;
+       212: aload_0
+       213: getfield      #28                 // Field opp_card:I
+       216: iconst_1
+       217: invokevirtual #78                 // Method Player.get_strategy2:(II)I
+       220: istore_1
+       221: goto          1228
+       224: aload_0
+       225: getfield      #12                 // Field player:LPlayer;
+       228: aload_0
+       229: getfield      #28                 // Field opp_card:I
+       232: iconst_2
+       233: invokevirtual #78                 // Method Player.get_strategy2:(II)I
+       236: istore_1
+       237: goto          1228
+       240: aload_0
+       241: getfield      #12                 // Field player:LPlayer;
+       244: aload_0
+       245: getfield      #28                 // Field opp_card:I
+       248: iconst_3
+       249: invokevirtual #78                 // Method Player.get_strategy2:(II)I
+       252: istore_1
+       253: goto          1228
+       256: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       259: ldc           #42                 // String default reached
+       261: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       264: goto          1228
+       267: aload_0
+       268: getfield      #23                 // Field bh1:I
+       271: tableswitch   { // 2 to 17
+                       2: 348
+                       3: 384
+                       4: 353
+                       5: 384
+                       6: 358
+                       7: 384
+                       8: 363
+                       9: 384
+                      10: 384
+                      11: 384
+                      12: 384
+                      13: 368
+                      14: 384
+                      15: 373
+                      16: 384
+                      17: 378
+                 default: 384
+            }
+       348: iconst_0
+       349: istore_3
+       350: goto          392
+       353: iconst_1
+       354: istore_3
+       355: goto          392
+       358: iconst_2
+       359: istore_3
+       360: goto          392
+       363: iconst_3
+       364: istore_3
+       365: goto          392
+       368: iconst_4
+       369: istore_3
+       370: goto          392
+       373: iconst_5
+       374: istore_3
+       375: goto          392
+       378: bipush        6
+       380: istore_3
+       381: goto          392
+       384: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       387: ldc           #42                 // String default reached
+       389: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       392: aload_0
+       393: getfield      #22                 // Field bh2:I
+       396: tableswitch   { // 0 to 16
+                       0: 480
+                       1: 564
+                       2: 648
+                       3: 501
+                       4: 648
+                       5: 606
+                       6: 648
+                       7: 543
+                       8: 648
+                       9: 648
+                      10: 648
+                      11: 648
+                      12: 585
+                      13: 648
+                      14: 522
+                      15: 648
+                      16: 627
+                 default: 648
+            }
+       480: aload_0
+       481: getfield      #12                 // Field player:LPlayer;
+       484: aload_0
+       485: getfield      #28                 // Field opp_card:I
+       488: iload_3
+       489: aload_0
+       490: getfield      #26                 // Field flop_card:I
+       493: iconst_0
+       494: invokevirtual #79                 // Method Player.get_strategy1:(IIII)I
+       497: istore_1
+       498: goto          1228
+       501: aload_0
+       502: getfield      #12                 // Field player:LPlayer;
+       505: aload_0
+       506: getfield      #28                 // Field opp_card:I
+       509: iload_3
+       510: aload_0
+       511: getfield      #26                 // Field flop_card:I
+       514: iconst_1
+       515: invokevirtual #79                 // Method Player.get_strategy1:(IIII)I
+       518: istore_1
+       519: goto          1228
+       522: aload_0
+       523: getfield      #12                 // Field player:LPlayer;
+       526: aload_0
+       527: getfield      #28                 // Field opp_card:I
+       530: iload_3
+       531: aload_0
+       532: getfield      #26                 // Field flop_card:I
+       535: iconst_2
+       536: invokevirtual #79                 // Method Player.get_strategy1:(IIII)I
+       539: istore_1
+       540: goto          1228
+       543: aload_0
+       544: getfield      #12                 // Field player:LPlayer;
+       547: aload_0
+       548: getfield      #28                 // Field opp_card:I
+       551: iload_3
+       552: aload_0
+       553: getfield      #26                 // Field flop_card:I
+       556: iconst_3
+       557: invokevirtual #79                 // Method Player.get_strategy1:(IIII)I
+       560: istore_1
+       561: goto          1228
+       564: aload_0
+       565: getfield      #12                 // Field player:LPlayer;
+       568: aload_0
+       569: getfield      #28                 // Field opp_card:I
+       572: iload_3
+       573: aload_0
+       574: getfield      #26                 // Field flop_card:I
+       577: iconst_0
+       578: invokevirtual #80                 // Method Player.get_strategy2:(IIII)I
+       581: istore_1
+       582: goto          1228
+       585: aload_0
+       586: getfield      #12                 // Field player:LPlayer;
+       589: aload_0
+       590: getfield      #28                 // Field opp_card:I
+       593: iload_3
+       594: aload_0
+       595: getfield      #26                 // Field flop_card:I
+       598: iconst_1
+       599: invokevirtual #80                 // Method Player.get_strategy2:(IIII)I
+       602: istore_1
+       603: goto          1228
+       606: aload_0
+       607: getfield      #12                 // Field player:LPlayer;
+       610: aload_0
+       611: getfield      #28                 // Field opp_card:I
+       614: iload_3
+       615: aload_0
+       616: getfield      #26                 // Field flop_card:I
+       619: iconst_2
+       620: invokevirtual #80                 // Method Player.get_strategy2:(IIII)I
+       623: istore_1
+       624: goto          1228
+       627: aload_0
+       628: getfield      #12                 // Field player:LPlayer;
+       631: aload_0
+       632: getfield      #28                 // Field opp_card:I
+       635: iload_3
+       636: aload_0
+       637: getfield      #26                 // Field flop_card:I
+       640: iconst_3
+       641: invokevirtual #80                 // Method Player.get_strategy2:(IIII)I
+       644: istore_1
+       645: goto          1228
+       648: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       651: ldc           #42                 // String default reached
+       653: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       656: goto          1228
+       659: aload_0
+       660: getfield      #23                 // Field bh1:I
+       663: tableswitch   { // 2 to 17
+                       2: 740
+                       3: 776
+                       4: 745
+                       5: 776
+                       6: 750
+                       7: 776
+                       8: 755
+                       9: 776
+                      10: 776
+                      11: 776
+                      12: 776
+                      13: 760
+                      14: 776
+                      15: 765
+                      16: 776
+                      17: 770
+                 default: 776
+            }
+       740: iconst_0
+       741: istore_3
+       742: goto          784
+       745: iconst_1
+       746: istore_3
+       747: goto          784
+       750: iconst_2
+       751: istore_3
+       752: goto          784
+       755: iconst_3
+       756: istore_3
+       757: goto          784
+       760: iconst_4
+       761: istore_3
+       762: goto          784
+       765: iconst_5
+       766: istore_3
+       767: goto          784
+       770: bipush        6
+       772: istore_3
+       773: goto          784
+       776: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       779: ldc           #42                 // String default reached
+       781: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       784: aload_0
+       785: getfield      #22                 // Field bh2:I
+       788: tableswitch   { // 2 to 17
+                       2: 868
+                       3: 911
+                       4: 874
+                       5: 911
+                       6: 880
+                       7: 911
+                       8: 886
+                       9: 911
+                      10: 911
+                      11: 911
+                      12: 911
+                      13: 892
+                      14: 911
+                      15: 898
+                      16: 911
+                      17: 904
+                 default: 911
+            }
+       868: iconst_0
+       869: istore        4
+       871: goto          919
+       874: iconst_1
+       875: istore        4
+       877: goto          919
+       880: iconst_2
+       881: istore        4
+       883: goto          919
+       886: iconst_3
+       887: istore        4
+       889: goto          919
+       892: iconst_4
+       893: istore        4
+       895: goto          919
+       898: iconst_5
+       899: istore        4
+       901: goto          919
+       904: bipush        6
+       906: istore        4
+       908: goto          919
+       911: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       914: ldc           #42                 // String default reached
+       916: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       919: aload_0
+       920: getfield      #21                 // Field bh3:I
+       923: tableswitch   { // 0 to 16
+                       0: 1004
+                       1: 1112
+                       2: 1220
+                       3: 1031
+                       4: 1220
+                       5: 1166
+                       6: 1220
+                       7: 1085
+                       8: 1220
+                       9: 1220
+                      10: 1220
+                      11: 1220
+                      12: 1139
+                      13: 1220
+                      14: 1058
+                      15: 1220
+                      16: 1193
+                 default: 1220
+            }
+      1004: aload_0
+      1005: getfield      #12                 // Field player:LPlayer;
+      1008: aload_0
+      1009: getfield      #28                 // Field opp_card:I
+      1012: iload_3
+      1013: aload_0
+      1014: getfield      #26                 // Field flop_card:I
+      1017: iload         4
+      1019: aload_0
+      1020: getfield      #27                 // Field turn_card:I
+      1023: iconst_0
+      1024: invokevirtual #81                 // Method Player.get_strategy1:(IIIIII)I
+      1027: istore_1
+      1028: goto          1228
+      1031: aload_0
+      1032: getfield      #12                 // Field player:LPlayer;
+      1035: aload_0
+      1036: getfield      #28                 // Field opp_card:I
+      1039: iload_3
+      1040: aload_0
+      1041: getfield      #26                 // Field flop_card:I
+      1044: iload         4
+      1046: aload_0
+      1047: getfield      #27                 // Field turn_card:I
+      1050: iconst_1
+      1051: invokevirtual #81                 // Method Player.get_strategy1:(IIIIII)I
+      1054: istore_1
+      1055: goto          1228
+      1058: aload_0
+      1059: getfield      #12                 // Field player:LPlayer;
+      1062: aload_0
+      1063: getfield      #28                 // Field opp_card:I
+      1066: iload_3
+      1067: aload_0
+      1068: getfield      #26                 // Field flop_card:I
+      1071: iload         4
+      1073: aload_0
+      1074: getfield      #27                 // Field turn_card:I
+      1077: iconst_2
+      1078: invokevirtual #81                 // Method Player.get_strategy1:(IIIIII)I
+      1081: istore_1
+      1082: goto          1228
+      1085: aload_0
+      1086: getfield      #12                 // Field player:LPlayer;
+      1089: aload_0
+      1090: getfield      #28                 // Field opp_card:I
+      1093: iload_3
+      1094: aload_0
+      1095: getfield      #26                 // Field flop_card:I
+      1098: iload         4
+      1100: aload_0
+      1101: getfield      #27                 // Field turn_card:I
+      1104: iconst_3
+      1105: invokevirtual #81                 // Method Player.get_strategy1:(IIIIII)I
+      1108: istore_1
+      1109: goto          1228
+      1112: aload_0
+      1113: getfield      #12                 // Field player:LPlayer;
+      1116: aload_0
+      1117: getfield      #28                 // Field opp_card:I
+      1120: iload_3
+      1121: aload_0
+      1122: getfield      #26                 // Field flop_card:I
+      1125: iload         4
+      1127: aload_0
+      1128: getfield      #27                 // Field turn_card:I
+      1131: iconst_0
+      1132: invokevirtual #82                 // Method Player.get_strategy2:(IIIIII)I
+      1135: istore_1
+      1136: goto          1228
+      1139: aload_0
+      1140: getfield      #12                 // Field player:LPlayer;
+      1143: aload_0
+      1144: getfield      #28                 // Field opp_card:I
+      1147: iload_3
+      1148: aload_0
+      1149: getfield      #26                 // Field flop_card:I
+      1152: iload         4
+      1154: aload_0
+      1155: getfield      #27                 // Field turn_card:I
+      1158: iconst_1
+      1159: invokevirtual #82                 // Method Player.get_strategy2:(IIIIII)I
+      1162: istore_1
+      1163: goto          1228
+      1166: aload_0
+      1167: getfield      #12                 // Field player:LPlayer;
+      1170: aload_0
+      1171: getfield      #28                 // Field opp_card:I
+      1174: iload_3
+      1175: aload_0
+      1176: getfield      #26                 // Field flop_card:I
+      1179: iload         4
+      1181: aload_0
+      1182: getfield      #27                 // Field turn_card:I
+      1185: iconst_2
+      1186: invokevirtual #82                 // Method Player.get_strategy2:(IIIIII)I
+      1189: istore_1
+      1190: goto          1228
+      1193: aload_0
+      1194: getfield      #12                 // Field player:LPlayer;
+      1197: aload_0
+      1198: getfield      #28                 // Field opp_card:I
+      1201: iload_3
+      1202: aload_0
+      1203: getfield      #26                 // Field flop_card:I
+      1206: iload         4
+      1208: aload_0
+      1209: getfield      #27                 // Field turn_card:I
+      1212: iconst_3
+      1213: invokevirtual #82                 // Method Player.get_strategy2:(IIIIII)I
+      1216: istore_1
+      1217: goto          1228
+      1220: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1223: ldc           #42                 // String default reached
+      1225: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1228: iconst_0
+      1229: istore        5
+      1231: aload_0
+      1232: getfield      #20                 // Field round:I
+      1235: tableswitch   { // 0 to 2
+                       0: 1260
+                       1: 1269
+                       2: 1278
+                 default: 1287
+            }
+      1260: aload_0
+      1261: getfield      #23                 // Field bh1:I
+      1264: istore        5
+      1266: goto          1295
+      1269: aload_0
+      1270: getfield      #22                 // Field bh2:I
+      1273: istore        5
+      1275: goto          1295
+      1278: aload_0
+      1279: getfield      #21                 // Field bh3:I
+      1282: istore        5
+      1284: goto          1295
+      1287: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1290: ldc           #42                 // String default reached
+      1292: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1295: iload         5
+      1297: tableswitch   { // 0 to 16
+                       0: 1380
+                       1: 1380
+                       2: 1529
+                       3: 1429
+                       4: 1529
+                       5: 1429
+                       6: 1529
+                       7: 1482
+                       8: 1529
+                       9: 1529
+                      10: 1529
+                      11: 1529
+                      12: 1429
+                      13: 1529
+                      14: 1429
+                      15: 1529
+                      16: 1482
+                 default: 1529
+            }
+      1380: iload_1
+      1381: lookupswitch  { // 2
+                       0: 1408
+                       1: 1413
+                 default: 1418
+            }
+      1408: iconst_1
+      1409: istore_2
+      1410: goto          1537
+      1413: iconst_3
+      1414: istore_2
+      1415: goto          1537
+      1418: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1421: ldc           #83                 // String doh
+      1423: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1426: goto          1537
+      1429: iload_1
+      1430: tableswitch   { // 0 to 2
+                       0: 1456
+                       1: 1461
+                       2: 1466
+                 default: 1471
+            }
+      1456: iconst_2
+      1457: istore_2
+      1458: goto          1537
+      1461: iconst_0
+      1462: istore_2
+      1463: goto          1537
+      1466: iconst_4
+      1467: istore_2
+      1468: goto          1537
+      1471: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1474: ldc           #83                 // String doh
+      1476: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1479: goto          1537
+      1482: iload_1
+      1483: lookupswitch  { // 2
+                       0: 1508
+                       1: 1513
+                 default: 1518
+            }
+      1508: iconst_2
+      1509: istore_2
+      1510: goto          1537
+      1513: iconst_0
+      1514: istore_2
+      1515: goto          1537
+      1518: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1521: ldc           #83                 // String doh
+      1523: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1526: goto          1537
+      1529: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      1532: ldc           #83                 // String doh
+      1534: invokevirtual #43                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      1537: aload_0
+      1538: iload_2
+      1539: invokevirtual #84                 // Method do_action:(I)V
+      1542: iload_2
+      1543: tableswitch   { // 0 to 4
+                       0: 1576
+                       1: 1616
+                       2: 1586
+                       3: 1606
+                       4: 1596
+                 default: 1626
+            }
+      1576: new           #7                  // class java/lang/String
+      1579: dup
+      1580: ldc           #85                 // String Computer calls\n
+      1582: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1585: areturn
+      1586: new           #7                  // class java/lang/String
+      1589: dup
+      1590: ldc           #87                 // String Computer folds\n
+      1592: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1595: areturn
+      1596: new           #7                  // class java/lang/String
+      1599: dup
+      1600: ldc           #88                 // String Computer raises\n
+      1602: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1605: areturn
+      1606: new           #7                  // class java/lang/String
+      1609: dup
+      1610: ldc           #89                 // String Computer bets\n
+      1612: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1615: areturn
+      1616: new           #7                  // class java/lang/String
+      1619: dup
+      1620: ldc           #90                 // String Computer checks\n
+      1622: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1625: areturn
+      1626: new           #7                  // class java/lang/String
+      1629: dup
+      1630: ldc           #91                 // String internal error
+      1632: invokespecial #86                 // Method java/lang/String."<init>":(Ljava/lang/String;)V
+      1635: areturn
+
+  private void shuffle();
+    Code:
+         0: aload_0
+         1: aload_0
+         2: getfield      #6                  // Field random:Ljava/util/Random;
+         5: bipush        52
+         7: invokevirtual #92                 // Method java/util/Random.nextInt:(I)I
+        10: putfield      #26                 // Field flop_card:I
+        13: aload_0
+        14: aload_0
+        15: getfield      #6                  // Field random:Ljava/util/Random;
+        18: bipush        52
+        20: invokevirtual #92                 // Method java/util/Random.nextInt:(I)I
+        23: putfield      #27                 // Field turn_card:I
+        26: aload_0
+        27: getfield      #27                 // Field turn_card:I
+        30: aload_0
+        31: getfield      #26                 // Field flop_card:I
+        34: if_icmpeq     13
+        37: aload_0
+        38: aload_0
+        39: getfield      #6                  // Field random:Ljava/util/Random;
+        42: bipush        52
+        44: invokevirtual #92                 // Method java/util/Random.nextInt:(I)I
+        47: putfield      #28                 // Field opp_card:I
+        50: aload_0
+        51: getfield      #28                 // Field opp_card:I
+        54: aload_0
+        55: getfield      #26                 // Field flop_card:I
+        58: if_icmpeq     37
+        61: aload_0
+        62: getfield      #28                 // Field opp_card:I
+        65: aload_0
+        66: getfield      #27                 // Field turn_card:I
+        69: if_icmpeq     37
+        72: aload_0
+        73: aload_0
+        74: getfield      #6                  // Field random:Ljava/util/Random;
+        77: bipush        52
+        79: invokevirtual #92                 // Method java/util/Random.nextInt:(I)I
+        82: putfield      #29                 // Field player_card:I
+        85: aload_0
+        86: getfield      #29                 // Field player_card:I
+        89: aload_0
+        90: getfield      #26                 // Field flop_card:I
+        93: if_icmpeq     72
+        96: aload_0
+        97: getfield      #29                 // Field player_card:I
+       100: aload_0
+       101: getfield      #27                 // Field turn_card:I
+       104: if_icmpeq     72
+       107: aload_0
+       108: getfield      #29                 // Field player_card:I
+       111: aload_0
+       112: getfield      #28                 // Field opp_card:I
+       115: if_icmpeq     72
+       118: aload_0
+       119: iconst_1
+       120: putfield      #30                 // Field dealt:Z
+       123: return
+}

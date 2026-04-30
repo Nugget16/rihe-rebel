@@ -1,0 +1,75 @@
+ReBeL vs random:
+=== Match result ===
+Seed: 0
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 8.8395 chips  (95% CI ± 0.7629)
+Runtime: 863.02s  (11.6 hands/s)
+
+=== Match result ===
+Seed: 1
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -7.0900 chips  (95% CI ± 0.7519)
+Runtime: 2766.11s  (3.6 hands/s)
+
+  Seat-averaged EV: 7.965
+
+ReBeL vs heuristic:
+=== Match result ===
+Seed: 2
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -1.8690 chips  (95% CI ± 0.6169)
+Runtime: 3872.67s  (2.6 hands/s)
+
+=== Match result ===
+Seed: 3
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 1.5030 chips  (95% CI ± 0.5903)
+Runtime: 1674.90s  (6.0 hands/s)
+
+  Seat-averaged EV: -1.686
+
+ReBeL vs MCCFR:
+=== Match result ===
+Seed: 4
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 4.5335 chips  (95% CI ± 0.7421)
+Runtime: 751.38s  (13.3 hands/s)
+
+=== Match result ===
+Seed: 5
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -5.0490 chips  (95% CI ± 0.7494)
+Runtime: 779.98s  (12.8 hands/s)
+
+  Seat-averaged EV: 4.791
+
+ReBeL vs GSI:
+=== Match result ===
+Seed: 6
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 1.2610 chips  (95% CI ± 0.6347)
+Runtime: 753.74s  (13.3 hands/s)
+
+=== Match result ===
+Seed: 7
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -1.7715 chips  (95% CI ± 0.6193)
+Runtime: 731.92s  (13.7 hands/s)
+
+  Seat-averaged EV: 1.516

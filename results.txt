@@ -1,0 +1,46 @@
+=== Match result ===
+Seed: 0
+Hands: 100000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=2 | p0_busts=0 | p1_busts=2
+Mean profit/hand for P0: 2.0481 chips  (95% CI ± 0.1966)
+Runtime: 7.15s  (13988.6 hands/s)
+
+=== Match result ===
+Seed: 1
+Hands: 100000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=1 | p0_busts=1 | p1_busts=0
+Mean profit/hand for P0: -1.8381 chips  (95% CI ± 0.1962)
+Runtime: 6.91s  (14481.2 hands/s)
+
+GSI EV as P0: 2.048 ± 0.197
+GSI EV as P1: 1.838 ± 0.196
+Seat-averaged: 1.943
+
+GSI query stats (533381 total):
+  NOT_FOUND :  21360 (4.0%)
+  Errors    :   4630 (0.9%)
+  Illegal   :      0 (0.0%)
+  Good      : 507391 (95.1%)
+
+GSI vs heuristic:
+=== Match result ===
+Seed: 2
+Hands: 100000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=1 | p0_busts=1 | p1_busts=0
+Mean profit/hand for P0: -1.2182 chips  (95% CI ± 0.1360)
+Runtime: 5.70s  (17548.2 hands/s)
+
+=== Match result ===
+Seed: 3
+Hands: 100000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=1 | p0_busts=0 | p1_busts=1
+Mean profit/hand for P0: 1.1622 chips  (95% CI ± 0.1364)
+Runtime: 5.55s  (18007.3 hands/s)
+
+GSI EV as P0: -1.218 ± 0.136
+GSI EV as P1: -1.162 ± 0.136
+Seat-averaged: -1.190

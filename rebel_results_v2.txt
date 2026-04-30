@@ -1,0 +1,37 @@
+ReBeL vs MCCFR:
+=== Match result ===
+Seed: 4
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 5.3655 chips  (95% CI ± 0.7787)
+Runtime: 831.12s  (12.0 hands/s)
+
+=== Match result ===
+Seed: 5
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -4.6905 chips  (95% CI ± 0.7710)
+Runtime: 855.61s  (11.7 hands/s)
+
+  Seat-averaged EV: 5.028
+
+ReBeL vs GSI:
+=== Match result ===
+Seed: 6
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: 1.7690 chips  (95% CI ± 0.6458)
+Runtime: 835.46s  (12.0 hands/s)
+
+=== Match result ===
+Seed: 7
+Hands: 10000
+Starting stack (per reset): 100000 each
+Bankroll resets: total=0 | p0_busts=0 | p1_busts=0
+Mean profit/hand for P0: -1.6605 chips  (95% CI ± 0.6449)
+Runtime: 797.47s  (12.5 hands/s)
+
+  Seat-averaged EV: 1.715
